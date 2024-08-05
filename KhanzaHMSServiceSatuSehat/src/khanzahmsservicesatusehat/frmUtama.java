@@ -4627,7 +4627,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "satu_sehat_mapping_obat.denominator_system,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,detail_pemberian_obat.jml,satu_sehat_medication.id_medication,"+
                    "aturan_pakai.aturan,resep_obat.no_resep,ifnull(satu_sehat_medicationdispense.id_medicationdispanse,'') as id_medicationdispanse,detail_pemberian_obat.no_batch,"+
                    "detail_pemberian_obat.no_faktur,detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.jam,satu_sehat_mapping_lokasi_depo_farmasi.id_lokasi_satusehat,"+
-                   "bangsal.nm_bangsal from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                   "bangsal.nm_bangsal,satu_sehat_medicationrequest.id_medicationrequest from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                    "inner join resep_obat on reg_periksa.no_rawat=resep_obat.no_rawat "+
                    "inner join pegawai on resep_obat.kd_dokter=pegawai.nik "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
@@ -4640,6 +4640,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join bangsal on bangsal.kd_bangsal=detail_pemberian_obat.kd_bangsal "+
                    "inner join satu_sehat_mapping_lokasi_depo_farmasi on satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal=bangsal.kd_bangsal "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
+                   "inner join satu_sehat_medicationrequest on satu_sehat_medicationrequest.no_resep=resep_obat.no_resep "+
                    "inner join nota_jalan on nota_jalan.no_rawat=reg_periksa.no_rawat "+
                    "left join satu_sehat_medicationdispense on satu_sehat_medicationdispense.no_rawat=detail_pemberian_obat.no_rawat and "+
                    "satu_sehat_medicationdispense.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and "+
@@ -4725,6 +4726,11 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Location/"+rs.getString("id_lokasi_satusehat")+"\"," +
                                                 "\"display\": \""+rs.getString("nm_bangsal")+"\"" +
                                             "},"+
+                                            "\"authorizingPrescription\": [" +
+                                                "{" +
+                                                    "\"reference\": \"MedicationRequest/"+rs.getString("id_medicationrequest")+"\"" +
+                                                "}" +
+                                            "],"+
                                             "\"quantity\": {" +
                                                 "\"system\": \""+rs.getString("denominator_system")+"\"," +
                                                 "\"code\": \""+rs.getString("denominator_code")+"\"," +
@@ -4813,7 +4819,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "satu_sehat_mapping_obat.denominator_system,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,detail_pemberian_obat.jml,satu_sehat_medication.id_medication,"+
                    "aturan_pakai.aturan,resep_obat.no_resep,ifnull(satu_sehat_medicationdispense.id_medicationdispanse,'') as id_medicationdispanse,detail_pemberian_obat.no_batch,"+
                    "detail_pemberian_obat.no_faktur,detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.jam,satu_sehat_mapping_lokasi_depo_farmasi.id_lokasi_satusehat,"+
-                   "bangsal.nm_bangsal from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                   "bangsal.nm_bangsal,satu_sehat_medicationrequest.id_medicationrequest from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                    "inner join resep_obat on reg_periksa.no_rawat=resep_obat.no_rawat "+
                    "inner join pegawai on resep_obat.kd_dokter=pegawai.nik "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
@@ -4826,6 +4832,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join bangsal on bangsal.kd_bangsal=detail_pemberian_obat.kd_bangsal "+
                    "inner join satu_sehat_mapping_lokasi_depo_farmasi on satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal=bangsal.kd_bangsal "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
+                   "inner join satu_sehat_medicationrequest on satu_sehat_medicationrequest.no_resep=resep_obat.no_resep "+
                    "inner join nota_inap on nota_inap.no_rawat=reg_periksa.no_rawat "+
                    "left join satu_sehat_medicationdispense on satu_sehat_medicationdispense.no_rawat=detail_pemberian_obat.no_rawat and "+
                    "satu_sehat_medicationdispense.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and "+
@@ -4911,6 +4918,11 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Location/"+rs.getString("id_lokasi_satusehat")+"\"," +
                                                 "\"display\": \""+rs.getString("nm_bangsal")+"\"" +
                                             "},"+
+                                            "\"authorizingPrescription\": [" +
+                                                "{" +
+                                                    "\"reference\": \"MedicationRequest/"+rs.getString("id_medicationrequest")+"\"" +
+                                                "}" +
+                                            "],"+
                                             "\"quantity\": {" +
                                                 "\"system\": \""+rs.getString("denominator_system")+"\"," +
                                                 "\"code\": \""+rs.getString("denominator_code")+"\"," +
