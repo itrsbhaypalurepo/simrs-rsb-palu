@@ -817,7 +817,7 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                                         "\"encounter\": {" +
                                             "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
                                         "}," +
-                                        "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"01+07:00\"," +
+                                        "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"requester\": {" +
                                             "\"reference\": \"Practitioner/"+iddokter+"\"," +
                                             "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
@@ -860,6 +860,9 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                                                 "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
                                                 "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
                                                 "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                            "}," +
+                                            "\"performer\": {" +
+                                                "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
                                             "}" +
                                         "}" +
                                     "}";
@@ -1084,7 +1087,7 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                                         "\"encounter\": {" +
                                             "\"reference\": \"Encounter/"+tbObat.getValueAt(i,8).toString()+"\"" +
                                         "}," +
-                                        "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"01+07:00\"," +
+                                        "\"authoredOn\": \""+tbObat.getValueAt(i,21).toString().replaceAll(" ","T")+"+07:00\"," +
                                         "\"requester\": {" +
                                             "\"reference\": \"Practitioner/"+iddokter+"\"," +
                                             "\"display\": \""+tbObat.getValueAt(i,6).toString()+"\"" +
@@ -1127,6 +1130,9 @@ public final class SatuSehatKirimMedicationRequest extends javax.swing.JDialog {
                                                 "\"unit\": \""+tbObat.getValueAt(i,19).toString()+"\"," +
                                                 "\"system\": \""+tbObat.getValueAt(i,20).toString()+"\"," +
                                                 "\"code\": \""+tbObat.getValueAt(i,19).toString()+"\"" +
+                                            "}," +
+                                            "\"performer\": {" +
+                                                "\"reference\": \"Organization/"+koneksiDB.IDSATUSEHAT()+"\"" +
                                             "}" +
                                         "}" +
                                     "}";
