@@ -7,7 +7,6 @@ package khanzahmsservicesatusehat;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import fungsi.ApiSatuSehat;
 import fungsi.SatuSehatCekNIK;
 import fungsi.koneksiDB;
@@ -25,8 +24,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -346,17 +343,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -468,17 +456,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -579,17 +558,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception eg){
+                                System.out.println("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ed) {
                             System.out.println("Notifikasi : "+ed);
@@ -683,17 +653,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception eg){
+                                System.out.println("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ed) {
                             System.out.println("Notifikasi : "+ed);
@@ -792,17 +753,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ef){
+                                System.out.println("Notifikasi Bridging : "+ef);
                             }
                         } catch (Exception eg) {
                             System.out.println("Notifikasi : "+eg);
@@ -896,17 +848,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ef){
+                                System.out.println("Notifikasi Bridging : "+ef);
                             }
                         } catch (Exception eg) {
                             System.out.println("Notifikasi : "+eg);
@@ -1005,17 +948,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception es) {
                             System.out.println("Notifikasi : "+es);
@@ -1109,17 +1043,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception es) {
                             System.out.println("Notifikasi : "+es);
@@ -1218,17 +1143,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ef){
+                                System.out.println("Notifikasi Bridging : "+ef);
                             }
                         } catch (Exception ex) {
                             System.out.println("Notifikasi : "+ex);
@@ -1322,17 +1238,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ef){
+                                System.out.println("Notifikasi Bridging : "+ef);
                             }
                         } catch (Exception ex) {
                             System.out.println("Notifikasi : "+ex);
@@ -1430,17 +1337,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception es){
+                                System.out.println("Notifikasi Bridging : "+es);
                             }
                         } catch (Exception ea) {
                             System.out.println("Notifikasi : "+ea);
@@ -1533,17 +1431,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception es){
+                                System.out.println("Notifikasi Bridging : "+es);
                             }
                         } catch (Exception ea) {
                             System.out.println("Notifikasi : "+ea);
@@ -1639,17 +1528,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception eg){
+                                System.out.println("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -1740,17 +1620,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception eg){
+                                System.out.println("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -1897,17 +1768,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception eg){
+                                System.out.println("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -2049,17 +1911,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception eg){
+                                System.out.println("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -2158,17 +2011,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception eg){
+                                System.out.println("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -2262,17 +2106,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception eg){
+                                System.out.println("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -2371,17 +2206,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2475,17 +2301,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2584,17 +2401,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2705,17 +2513,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ralan",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2818,17 +2617,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),"Ranap",response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2972,17 +2762,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("kode_brng"),rs.getString("no_batch"),rs.getString("no_faktur"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3120,17 +2901,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("kode_brng"),rs.getString("no_batch"),rs.getString("no_faktur"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3221,17 +2993,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("kode"),rs.getString("status_lanjut"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3316,17 +3079,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("kode"),rs.getString("status_lanjut"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3422,17 +3176,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("kd_penyakit"),rs.getString("status_lanjut"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3522,17 +3267,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("kd_penyakit"),rs.getString("status_lanjut"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3658,17 +3394,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tanggal"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3788,17 +3515,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tanggal"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4059,17 +3777,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_resep"),rs.getString("kode_brng"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4233,17 +3942,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_resep"),rs.getString("kode_brng"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4409,17 +4109,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_resep"),rs.getString("kode_brng"),rs.getString("no_racik"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4585,17 +4276,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_resep"),rs.getString("kode_brng"),rs.getString("no_racik"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4627,7 +4309,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "satu_sehat_mapping_obat.denominator_system,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,detail_pemberian_obat.jml,satu_sehat_medication.id_medication,"+
                    "aturan_pakai.aturan,resep_obat.no_resep,ifnull(satu_sehat_medicationdispense.id_medicationdispanse,'') as id_medicationdispanse,detail_pemberian_obat.no_batch,"+
                    "detail_pemberian_obat.no_faktur,detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.jam,satu_sehat_mapping_lokasi_depo_farmasi.id_lokasi_satusehat,"+
-                   "bangsal.nm_bangsal,satu_sehat_medicationrequest.id_medicationrequest from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                   "bangsal.nm_bangsal from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                    "inner join resep_obat on reg_periksa.no_rawat=resep_obat.no_rawat "+
                    "inner join pegawai on resep_obat.kd_dokter=pegawai.nik "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
@@ -4640,7 +4322,6 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join bangsal on bangsal.kd_bangsal=detail_pemberian_obat.kd_bangsal "+
                    "inner join satu_sehat_mapping_lokasi_depo_farmasi on satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal=bangsal.kd_bangsal "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   "inner join satu_sehat_medicationrequest on satu_sehat_medicationrequest.no_resep=resep_obat.no_resep "+
                    "inner join nota_jalan on nota_jalan.no_rawat=reg_periksa.no_rawat "+
                    "left join satu_sehat_medicationdispense on satu_sehat_medicationdispense.no_rawat=detail_pemberian_obat.no_rawat and "+
                    "satu_sehat_medicationdispense.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and "+
@@ -4726,11 +4407,6 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Location/"+rs.getString("id_lokasi_satusehat")+"\"," +
                                                 "\"display\": \""+rs.getString("nm_bangsal")+"\"" +
                                             "},"+
-                                            "\"authorizingPrescription\": [" +
-                                                "{" +
-                                                    "\"reference\": \"MedicationRequest/"+rs.getString("id_medicationrequest")+"\"" +
-                                                "}" +
-                                            "],"+
                                             "\"quantity\": {" +
                                                 "\"system\": \""+rs.getString("denominator_system")+"\"," +
                                                 "\"code\": \""+rs.getString("denominator_code")+"\"," +
@@ -4783,17 +4459,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("kode_brng"),rs.getString("no_batch"),rs.getString("no_faktur"),response.asText()
                                    });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4819,7 +4486,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "satu_sehat_mapping_obat.denominator_system,resep_obat.tgl_peresepan,resep_obat.jam_peresepan,detail_pemberian_obat.jml,satu_sehat_medication.id_medication,"+
                    "aturan_pakai.aturan,resep_obat.no_resep,ifnull(satu_sehat_medicationdispense.id_medicationdispanse,'') as id_medicationdispanse,detail_pemberian_obat.no_batch,"+
                    "detail_pemberian_obat.no_faktur,detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.jam,satu_sehat_mapping_lokasi_depo_farmasi.id_lokasi_satusehat,"+
-                   "bangsal.nm_bangsal,satu_sehat_medicationrequest.id_medicationrequest from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                   "bangsal.nm_bangsal from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                    "inner join resep_obat on reg_periksa.no_rawat=resep_obat.no_rawat "+
                    "inner join pegawai on resep_obat.kd_dokter=pegawai.nik "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
@@ -4832,7 +4499,6 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join bangsal on bangsal.kd_bangsal=detail_pemberian_obat.kd_bangsal "+
                    "inner join satu_sehat_mapping_lokasi_depo_farmasi on satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal=bangsal.kd_bangsal "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   "inner join satu_sehat_medicationrequest on satu_sehat_medicationrequest.no_resep=resep_obat.no_resep "+
                    "inner join nota_inap on nota_inap.no_rawat=reg_periksa.no_rawat "+
                    "left join satu_sehat_medicationdispense on satu_sehat_medicationdispense.no_rawat=detail_pemberian_obat.no_rawat and "+
                    "satu_sehat_medicationdispense.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and "+
@@ -4918,11 +4584,6 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "\"reference\": \"Location/"+rs.getString("id_lokasi_satusehat")+"\"," +
                                                 "\"display\": \""+rs.getString("nm_bangsal")+"\"" +
                                             "},"+
-                                            "\"authorizingPrescription\": [" +
-                                                "{" +
-                                                    "\"reference\": \"MedicationRequest/"+rs.getString("id_medicationrequest")+"\"" +
-                                                "}" +
-                                            "],"+
                                             "\"quantity\": {" +
                                                 "\"system\": \""+rs.getString("denominator_system")+"\"," +
                                                 "\"code\": \""+rs.getString("denominator_code")+"\"," +
@@ -4975,17 +4636,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("no_rawat"),rs.getString("tgl_perawatan"),rs.getString("jam"),rs.getString("kode_brng"),rs.getString("no_batch"),rs.getString("no_faktur"),response.asText()
                                    });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception e){
+                                System.out.println("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -5101,17 +4753,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5225,17 +4868,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5326,17 +4960,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5425,17 +5050,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5552,17 +5168,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5677,17 +5284,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5820,17 +5418,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5961,17 +5550,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6088,17 +5668,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6213,17 +5784,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6340,17 +5902,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6465,17 +6018,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6569,17 +6113,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6671,17 +6206,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6775,17 +6301,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6877,17 +6394,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7007,17 +6515,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7135,17 +6634,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7265,17 +6755,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7393,17 +6874,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7540,17 +7012,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7685,17 +7148,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7832,17 +7286,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7977,17 +7422,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         rs.getString("noorder"),rs.getString("kd_jenis_prw"),rs.getString("id_template"),response.asText()
                                     });
                                 }
-                            }catch(HttpClientErrorException | HttpServerErrorException ea) {
-                                // menampilkan error code client dan server
-                                System.err.println("Error Response Status Code: " + ea.getStatusCode());
-
-                                ObjectMapper mapper = new ObjectMapper();
-                                JsonNode errorResponse = mapper.readTree(ea.getResponseBodyAsString());
-                                ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                                String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                                System.err.println("Error Response JSON: \n" + prettyErrorResponse);
-//                            catch(Exception ea){
-//                                System.out.println("Notifikasi Bridging : "+ea);
+                            }catch(Exception ea){
+                                System.out.println("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);

@@ -6,7 +6,6 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -34,8 +33,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -2143,29 +2140,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf2("satu_sehat_observationttvsuhu","?,?,?,?,?","Observation Suhu",5,new String[]{
-                                        tbSuhu.getValueAt(i,2).toString(),tbSuhu.getValueAt(i,13).toString(),tbSuhu.getValueAt(i,14).toString(),tbSuhu.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbSuhu.setValueAt(response.asText(),i,15);
-                                        tbSuhu.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_observationttvsuhu","?,?,?,?,?","Observation Suhu",5,new String[]{
+                                    tbSuhu.getValueAt(i,2).toString(),tbSuhu.getValueAt(i,13).toString(),tbSuhu.getValueAt(i,14).toString(),tbSuhu.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbSuhu.setValueAt(response.asText(),i,15);
+                                    tbSuhu.setValueAt(false,i,0);
                                 }
-                            
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2228,28 +2216,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf2("satu_sehat_observationttvrespirasi","?,?,?,?,?","Observation Respirasi",5,new String[]{
-                                        tbRespirasi.getValueAt(i,2).toString(),tbRespirasi.getValueAt(i,13).toString(),tbRespirasi.getValueAt(i,14).toString(),tbRespirasi.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbRespirasi.setValueAt(response.asText(),i,15);
-                                        tbRespirasi.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_observationttvrespirasi","?,?,?,?,?","Observation Respirasi",5,new String[]{
+                                    tbRespirasi.getValueAt(i,2).toString(),tbRespirasi.getValueAt(i,13).toString(),tbRespirasi.getValueAt(i,14).toString(),tbRespirasi.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbRespirasi.setValueAt(response.asText(),i,15);
+                                    tbRespirasi.setValueAt(false,i,0);
                                 }
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2312,29 +2292,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf2("satu_sehat_observationttvnadi","?,?,?,?,?","Observation Nadi",5,new String[]{
-                                        tbNadi.getValueAt(i,2).toString(),tbNadi.getValueAt(i,13).toString(),tbNadi.getValueAt(i,14).toString(),tbNadi.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbNadi.setValueAt(response.asText(),i,15);
-                                        tbNadi.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_observationttvnadi","?,?,?,?,?","Observation Nadi",5,new String[]{
+                                    tbNadi.getValueAt(i,2).toString(),tbNadi.getValueAt(i,13).toString(),tbNadi.getValueAt(i,14).toString(),tbNadi.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbNadi.setValueAt(response.asText(),i,15);
+                                    tbNadi.setValueAt(false,i,0);
                                 }
-                            
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2397,29 +2368,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf2("satu_sehat_observationttvspo2","?,?,?,?,?","Observation SpO2",5,new String[]{
-                                        tbSpO2.getValueAt(i,2).toString(),tbSpO2.getValueAt(i,13).toString(),tbSpO2.getValueAt(i,14).toString(),tbSpO2.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbSpO2.setValueAt(response.asText(),i,15);
-                                        tbSpO2.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_observationttvspo2","?,?,?,?,?","Observation SpO2",5,new String[]{
+                                    tbSpO2.getValueAt(i,2).toString(),tbSpO2.getValueAt(i,13).toString(),tbSpO2.getValueAt(i,14).toString(),tbSpO2.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbSpO2.setValueAt(response.asText(),i,15);
+                                    tbSpO2.setValueAt(false,i,0);
                                 }
-                            
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2481,29 +2443,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf("satu_sehat_observationttvgcs","?,?,?,?,?","Observation GCS",5,new String[]{
-                                        tbGCS.getValueAt(i,2).toString(),tbGCS.getValueAt(i,13).toString(),tbGCS.getValueAt(i,14).toString(),tbGCS.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbGCS.setValueAt(response.asText(),i,15);
-                                        tbGCS.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf("satu_sehat_observationttvgcs","?,?,?,?,?","Observation GCS",5,new String[]{
+                                    tbGCS.getValueAt(i,2).toString(),tbGCS.getValueAt(i,13).toString(),tbGCS.getValueAt(i,14).toString(),tbGCS.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbGCS.setValueAt(response.asText(),i,15);
+                                    tbGCS.setValueAt(false,i,0);
                                 }
-                            
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2563,29 +2516,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf2("satu_sehat_observationttvkesadaran","?,?,?,?,?","Observation Kesadaran",5,new String[]{
-                                        tbKesadaran.getValueAt(i,2).toString(),tbKesadaran.getValueAt(i,13).toString(),tbKesadaran.getValueAt(i,14).toString(),tbKesadaran.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbKesadaran.setValueAt(response.asText(),i,15);
-                                        tbKesadaran.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_observationttvkesadaran","?,?,?,?,?","Observation Kesadaran",5,new String[]{
+                                    tbKesadaran.getValueAt(i,2).toString(),tbKesadaran.getValueAt(i,13).toString(),tbKesadaran.getValueAt(i,14).toString(),tbKesadaran.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbKesadaran.setValueAt(response.asText(),i,15);
+                                    tbKesadaran.setValueAt(false,i,0);
                                 }
-                            
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2696,29 +2640,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf2("satu_sehat_observationttvtensi","?,?,?,?,?","Observation Tensi",5,new String[]{
-                                        tbTensi.getValueAt(i,2).toString(),tbTensi.getValueAt(i,13).toString(),tbTensi.getValueAt(i,14).toString(),tbTensi.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbTensi.setValueAt(response.asText(),i,15);
-                                        tbTensi.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_observationttvtensi","?,?,?,?,?","Observation Tensi",5,new String[]{
+                                    tbTensi.getValueAt(i,2).toString(),tbTensi.getValueAt(i,13).toString(),tbTensi.getValueAt(i,14).toString(),tbTensi.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbTensi.setValueAt(response.asText(),i,15);
+                                    tbTensi.setValueAt(false,i,0);
                                 }
-                            
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2781,29 +2716,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf2("satu_sehat_observationttvtb","?,?,?,?,?","Observation TB",5,new String[]{
-                                        tbTB.getValueAt(i,2).toString(),tbTB.getValueAt(i,13).toString(),tbTB.getValueAt(i,14).toString(),tbTB.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbTB.setValueAt(response.asText(),i,15);
-                                        tbTB.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_observationttvtb","?,?,?,?,?","Observation TB",5,new String[]{
+                                    tbTB.getValueAt(i,2).toString(),tbTB.getValueAt(i,13).toString(),tbTB.getValueAt(i,14).toString(),tbTB.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbTB.setValueAt(response.asText(),i,15);
+                                    tbTB.setValueAt(false,i,0);
                                 }
-                            
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2866,28 +2792,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf2("satu_sehat_observationttvbb","?,?,?,?,?","Observation BB",5,new String[]{
-                                        tbBB.getValueAt(i,2).toString(),tbBB.getValueAt(i,13).toString(),tbBB.getValueAt(i,14).toString(),tbBB.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbBB.setValueAt(response.asText(),i,15);
-                                        tbBB.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_observationttvbb","?,?,?,?,?","Observation BB",5,new String[]{
+                                    tbBB.getValueAt(i,2).toString(),tbBB.getValueAt(i,13).toString(),tbBB.getValueAt(i,14).toString(),tbBB.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbBB.setValueAt(response.asText(),i,15);
+                                    tbBB.setValueAt(false,i,0);
                                 }
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -2950,29 +2868,20 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             System.out.println("URL : "+link+"/Observation");
                             System.out.println("Request JSON : "+json);
                             requestEntity = new HttpEntity(json,headers);
-                                json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
-                                System.out.println("Result JSON : "+json);
-                                root = mapper.readTree(json);
-                                response = root.path("id");
-                                if(!response.asText().equals("")){
-                                    if(Sequel.menyimpantf2("satu_sehat_observationttvlp","?,?,?,?,?","Observation LP",5,new String[]{
-                                        tbLP.getValueAt(i,2).toString(),tbLP.getValueAt(i,13).toString(),tbLP.getValueAt(i,14).toString(),tbLP.getValueAt(i,7).toString(),response.asText()
-                                    })==true){
-                                        tbLP.setValueAt(response.asText(),i,15);
-                                        tbLP.setValueAt(false,i,0);
-                                    }
+                            json=api.getRest().exchange(link+"/Observation", HttpMethod.POST, requestEntity, String.class).getBody();
+                            System.out.println("Result JSON : "+json);
+                            root = mapper.readTree(json);
+                            response = root.path("id");
+                            if(!response.asText().equals("")){
+                                if(Sequel.menyimpantf2("satu_sehat_observationttvlp","?,?,?,?,?","Observation LP",5,new String[]{
+                                    tbLP.getValueAt(i,2).toString(),tbLP.getValueAt(i,13).toString(),tbLP.getValueAt(i,14).toString(),tbLP.getValueAt(i,7).toString(),response.asText()
+                                })==true){
+                                    tbLP.setValueAt(response.asText(),i,15);
+                                    tbLP.setValueAt(false,i,0);
                                 }
-                            
-                            
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                            }
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3137,15 +3046,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbSuhu.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbSuhu.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3212,15 +3114,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbRespirasi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbRespirasi.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3287,15 +3182,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbNadi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbNadi.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3362,15 +3250,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbSpO2.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbSpO2.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3436,15 +3317,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbGCS.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbGCS.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3508,15 +3382,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbKesadaran.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbKesadaran.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3614,15 +3481,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbTensi.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbTensi.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3689,15 +3549,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbTB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbTB.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3764,15 +3617,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbBB.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbBB.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
@@ -3839,15 +3685,8 @@ public final class SatuSehatKirimObservationTTV extends javax.swing.JDialog {
                             json=api.getRest().exchange(link+"/Observation/"+tbLP.getValueAt(i,15).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                             System.out.println("Result JSON : "+json);
                             tbLP.setValueAt(false,i,0);
-                        }catch(HttpClientErrorException | HttpServerErrorException e) {
-                            // menampilkan error code client dan server
-                            System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                            ObjectMapper mapper = new ObjectMapper();
-                            JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                            String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                            System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }catch(Exception e){
+                            System.out.println("Notifikasi Bridging : "+e);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);

@@ -416,11 +416,10 @@ public class frmUtama extends javax.swing.JFrame {
                                 "INNER JOIN poliklinik ON reg_periksa.kd_poli=poliklinik.kd_poli "+
                                 "INNER JOIN dokter ON reg_periksa.kd_dokter=dokter.kd_dokter "+
                                 "WHERE referensi_mobilejkn_bpjs.statuskirim='Sudah' and referensi_mobilejkn_bpjs.tanggalperiksa between '"+Tanggal1.getText()+"' and '"+Tanggal2.getText()+"' "+
-                                "order by referensi_mobilejkn_bpjs.validasi DESC, referensi_mobilejkn_bpjs.nobooking");
+                                "order by referensi_mobilejkn_bpjs.tanggalperiksa");
                         try {
                             rs=ps.executeQuery();
                             while(rs.next()){
-                                System.out.println("Pasien MJKN: "+rs.getString("nobooking") + " " + datajam);
                                 task3="";task4="";task5="";task6="";task7="";task99="";
                                 ps2=koneksi.prepareStatement("select referensi_mobilejkn_bpjs_taskid.taskid from referensi_mobilejkn_bpjs_taskid where referensi_mobilejkn_bpjs_taskid.no_rawat=?");
                                 try {
@@ -736,7 +735,6 @@ public class frmUtama extends javax.swing.JFrame {
                         try {
                             rs=ps.executeQuery();
                             while(rs.next()){
-                                System.out.println("Pasien OnSite: "+rs.getString("no_rawat") + " " + datajam);
                                 ps2=koneksi.prepareStatement("select * from jadwal where jadwal.hari_kerja=? and jadwal.kd_dokter=? and jadwal.kd_poli=?");
                                 try {
                                     ps2.setString(1,hari);
@@ -785,7 +783,7 @@ public class frmUtama extends javax.swing.JFrame {
                                             
                                             if(task3.equals("")){
                                                 try {     
-                                                    datajam=Sequel.cariIsi("select DATE_ADD(concat('"+rs.getString("tgl_registrasi")+"',' ','"+rs2.getString("jam_mulai")+"'),INTERVAL "+(Integer.parseInt(rs.getString("no_reg"))*10)+" MINUTE) ");
+                                                    datajam=Sequel.cariIsi("select DATE_ADD(concat('"+rs.getString("tgl_registrasi")+"',' ','"+rs2.getString("jam_mulai")+"'),INTERVAL "+(Integer.parseInt(rs.getString("no_reg"))*5)+" MINUTE) ");
                                                     parsedDate = dateFormat.parse(datajam);
                                                     if(!rs.getString("kd_pj").equals(kodebpjs)){
                                                         headers = new HttpHeaders();

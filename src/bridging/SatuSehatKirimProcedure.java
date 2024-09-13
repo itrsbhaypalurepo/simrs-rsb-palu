@@ -6,7 +6,6 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -34,8 +33,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -604,29 +601,20 @@ public final class SatuSehatKirimProcedure extends javax.swing.JDialog {
                         System.out.println("URL : "+link+"/Procedure");
                         System.out.println("Request JSON : "+json);
                         requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Procedure", HttpMethod.POST, requestEntity, String.class).getBody();
-                            System.out.println("Result JSON : "+json);
-                            root = mapper.readTree(json);
-                            response = root.path("id");
-                            if(!response.asText().equals("")){
-                                if(Sequel.menyimpantf2("satu_sehat_procedure","?,?,?,?","Prosedur",4,new String[]{
-                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString(),tbObat.getValueAt(i,7).toString(),response.asText()
-                                })==true){
-                                    tbObat.setValueAt(response.asText(),i,12);
-                                    tbObat.setValueAt(false,i,0);
-                                }
+                        json=api.getRest().exchange(link+"/Procedure", HttpMethod.POST, requestEntity, String.class).getBody();
+                        System.out.println("Result JSON : "+json);
+                        root = mapper.readTree(json);
+                        response = root.path("id");
+                        if(!response.asText().equals("")){
+                            if(Sequel.menyimpantf2("satu_sehat_procedure","?,?,?,?","Prosedur",4,new String[]{
+                                tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,10).toString(),tbObat.getValueAt(i,7).toString(),response.asText()
+                            })==true){
+                                tbObat.setValueAt(response.asText(),i,12);
+                                tbObat.setValueAt(false,i,0);
                             }
-                        
-                        
-                    }catch(HttpClientErrorException | HttpServerErrorException e) {
-                        // menampilkan error code client dan server
-                        System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                        ObjectMapper mapper = new ObjectMapper();
-                        JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                        ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                        String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                        System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }
+                    }catch(Exception e){
+                        System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -698,15 +686,8 @@ public final class SatuSehatKirimProcedure extends javax.swing.JDialog {
                         json=api.getRest().exchange(link+"/Procedure/"+tbObat.getValueAt(i,12).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
-                    }catch(HttpClientErrorException | HttpServerErrorException e) {
-                        // menampilkan error code client dan server
-                        System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                        ObjectMapper mapper = new ObjectMapper();
-                        JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                        ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                        String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                        System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                    }catch(Exception e){
+                        System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);

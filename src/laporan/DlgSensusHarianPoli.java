@@ -193,7 +193,6 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
         kdpenjab = new widget.TextBox();
         nmpenjab = new widget.TextBox();
         BtnSeek3 = new widget.Button();
-        chkPolri = new widget.CekBox();
         TabRawat = new javax.swing.JTabbedPane();
         internalFrame2 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -445,19 +444,6 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
         });
         panelisi4.add(BtnSeek3);
 
-        chkPolri.setSelected(true);
-        chkPolri.setText("POLRI");
-        chkPolri.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        chkPolri.setName("chkPolri"); // NOI18N
-        chkPolri.setOpaque(false);
-        chkPolri.setPreferredSize(new java.awt.Dimension(85, 30));
-        chkPolri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkPolriActionPerformed(evt);
-            }
-        });
-        panelisi4.add(chkPolri);
-
         internalFrame1.add(panelisi4, java.awt.BorderLayout.PAGE_START);
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 254));
@@ -706,14 +692,6 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
         BtnCariActionPerformed(null);
     }//GEN-LAST:event_ppTampilkanLamaBtnPrintActionPerformed
 
-    private void chkPolriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPolriActionPerformed
-        if(TabRawat.getSelectedIndex()==0){
-            tampil();
-        }else if(TabRawat.getSelectedIndex()==1){
-            tampil2();
-        }
-    }//GEN-LAST:event_chkPolriActionPerformed
-
     /**
     * @param args the command line arguments
     */
@@ -746,7 +724,6 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
     private javax.swing.JTabbedPane TabRawat;
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;
-    private widget.CekBox chkPolri;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
@@ -826,25 +803,14 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                     "<td valign='top' bgcolor='#FFFAFA' align='center' width='3%'>Baru</td>"+
                                 "</tr>" 
                             );
-                            if(chkPolri.isSelected() == true) {
-                                psreg = koneksi.prepareStatement(
-                                            "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.alamat,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,"+
-                                            "reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.no_rawat,golongan_polri.nama_golongan from reg_periksa inner join pasien inner join pasien_polri inner join golongan_polri inner join penjab "+
-                                            "on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.no_rkm_medis=pasien_polri.no_rkm_medis and pasien_polri.golongan_polri=golongan_polri.id and reg_periksa.kd_pj=penjab.kd_pj where "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.no_rkm_medis like ? or "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.nm_pasien like ? or "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.alamat like ? or "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.stts_daftar like ? order by reg_periksa.no_reg ");
-                            } else {
-                                psreg=koneksi.prepareStatement(
-                                        "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.alamat,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,"+
-                                        "reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.no_rawat from reg_periksa inner join pasien inner join penjab "+
-                                        "on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj where "+
-                                        "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.no_rkm_medis like ? or "+
-                                        "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.nm_pasien like ? or "+
-                                        "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.alamat like ? or "+
-                                        "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.stts_daftar like ? order by reg_periksa.no_reg ");
-                            }
+                            psreg=koneksi.prepareStatement(
+                                    "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.alamat,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,"+
+                                    "reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.no_rawat from reg_periksa inner join pasien inner join penjab "+
+                                    "on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj where "+
+                                    "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.no_rkm_medis like ? or "+
+                                    "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.nm_pasien like ? or "+
+                                    "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.alamat like ? or "+
+                                    "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.stts_daftar like ? order by reg_periksa.no_reg ");
                             try {
                                 i=1;
                                 psreg.setString(1,rstanggal.getString("tgl_registrasi"));
@@ -881,12 +847,11 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                     }else{
                                         jmlper=jmlper+1;
                                     }
-                                    if(chkPolri.isSelected() == true) {
-                                        htmlContent.append(
+                                    htmlContent.append(
                                         "<tr class='isi3'>"+
                                             "<td valign='top' align='center'>"+i+"</td>"+
                                             "<td valign='top' align='center'>"+rsreg.getString("no_rkm_medis")+"</td>"+
-                                            "<td valign='top'>"+rsreg.getString("nm_pasien")+" ("+rsreg.getString("nama_golongan")+")"+"</td>"+
+                                            "<td valign='top'>"+rsreg.getString("nm_pasien")+"</td>"+
                                             "<td valign='top'>"+rsreg.getString("alamat")+"</td>"+
                                             "<td valign='top' align='center'>"+rsreg.getString("jk")+"</td>"+
                                             "<td valign='top' align='center'>"+rsreg.getString("umur")+"</td>"+
@@ -895,23 +860,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                             "<td valign='top'>"+rsreg.getString("png_jawab")+"</td>"+
                                             "<td valign='top'>"+rujukandari+" "+alamatrujukandari+"</td>"+
                                             "<td valign='top'>"+
-                                            "<table width='100%' border='0'>");
-                                    } else {
-                                        htmlContent.append(
-                                            "<tr class='isi3'>"+
-                                                "<td valign='top' align='center'>"+i+"</td>"+
-                                                "<td valign='top' align='center'>"+rsreg.getString("no_rkm_medis")+"</td>"+
-                                                "<td valign='top'>"+rsreg.getString("nm_pasien")+"</td>"+
-                                                "<td valign='top'>"+rsreg.getString("alamat")+"</td>"+
-                                                "<td valign='top' align='center'>"+rsreg.getString("jk")+"</td>"+
-                                                "<td valign='top' align='center'>"+rsreg.getString("umur")+"</td>"+
-                                                "<td valign='top' align='center'>"+lama+"</td>"+
-                                                "<td valign='top' align='center'>"+baru+"</td>"+
-                                                "<td valign='top'>"+rsreg.getString("png_jawab")+"</td>"+
-                                                "<td valign='top'>"+rujukandari+" "+alamatrujukandari+"</td>"+
-                                                "<td valign='top'>"+
-                                                    "<table width='100%' border='0'>");
-                                    }
+                                                "<table width='100%' border='0'>");
                                     pspenyakit=koneksi.prepareStatement(
                                             "select diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit from diagnosa_pasien inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit where diagnosa_pasien.status='Ralan' and diagnosa_pasien.no_rawat=?");
                                     try {
@@ -1081,25 +1030,14 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                     "<td valign='top' bgcolor='#FFFAFA' align='center' width='3%'>Baru</td>"+
                                 "</tr>" 
                             );
-                            if(chkPolri.isSelected() == true) {
-                                psreg = koneksi.prepareStatement(
-                                            "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.alamat,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,"+
-                                            "reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.no_rawat,golongan_polri.nama_golongan from reg_periksa inner join pasien inner join pasien_polri inner join golongan_polri inner join penjab "+
-                                            "on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.no_rkm_medis=pasien_polri.no_rkm_medis and pasien_polri.golongan_polri=golongan_polri.id and reg_periksa.kd_pj=penjab.kd_pj where "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.no_rkm_medis like ? or "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.nm_pasien like ? or "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.alamat like ? or "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.stts_daftar like ? order by reg_periksa.no_reg ");
-                            } else {
-                                psreg=koneksi.prepareStatement(
-                                            "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.alamat,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,"+
-                                            "reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.no_rawat from reg_periksa inner join pasien inner join penjab "+
-                                            "on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj where "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.no_rkm_medis like ? or "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.nm_pasien like ? or "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.alamat like ? or "+
-                                            "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.stts_daftar like ? order by reg_periksa.no_reg "); 
-                            }
+                            psreg=koneksi.prepareStatement(
+                                    "select reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.alamat,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,"+
+                                    "reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.no_rawat from reg_periksa inner join pasien inner join penjab "+
+                                    "on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj where "+
+                                    "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.no_rkm_medis like ? or "+
+                                    "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.nm_pasien like ? or "+
+                                    "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and pasien.alamat like ? or "+
+                                    "reg_periksa.stts_daftar like '%"+status+"%' and reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi=? and reg_periksa.kd_poli=? and penjab.png_jawab like ? and reg_periksa.stts_daftar like ? order by reg_periksa.no_reg ");
                             try {
                                 i=1;
                                 psreg.setString(1,rstanggal.getString("tgl_registrasi"));
@@ -1136,12 +1074,11 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                     }else{
                                         jmlper=jmlper+1;
                                     }
-                                    if(chkPolri.isSelected() == true) {
-                                        htmlContent.append(
+                                    htmlContent.append(
                                         "<tr class='isi3'>"+
                                             "<td valign='top' align='center'>"+i+"</td>"+
                                             "<td valign='top' align='center'>"+rsreg.getString("no_rkm_medis")+"</td>"+
-                                            "<td valign='top'>"+rsreg.getString("nm_pasien")+" ("+rsreg.getString("nama_golongan")+")"+"</td>"+
+                                            "<td valign='top'>"+rsreg.getString("nm_pasien")+"</td>"+
                                             "<td valign='top'>"+rsreg.getString("alamat")+"</td>"+
                                             "<td valign='top' align='center'>"+rsreg.getString("jk")+"</td>"+
                                             "<td valign='top' align='center'>"+rsreg.getString("umur")+"</td>"+
@@ -1151,22 +1088,6 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
                                             "<td valign='top'>"+rujukandari+" "+alamatrujukandari+"</td>"+
                                             "<td valign='top'>"+
                                                 "<table width='100%' border='0'>");
-                                    } else {
-                                        htmlContent.append(
-                                            "<tr class='isi3'>"+
-                                                "<td valign='top' align='center'>"+i+"</td>"+
-                                                "<td valign='top' align='center'>"+rsreg.getString("no_rkm_medis")+"</td>"+
-                                                "<td valign='top'>"+rsreg.getString("nm_pasien")+"</td>"+
-                                                "<td valign='top'>"+rsreg.getString("alamat")+"</td>"+
-                                                "<td valign='top' align='center'>"+rsreg.getString("jk")+"</td>"+
-                                                "<td valign='top' align='center'>"+rsreg.getString("umur")+"</td>"+
-                                                "<td valign='top' align='center'>"+lama+"</td>"+
-                                                "<td valign='top' align='center'>"+baru+"</td>"+
-                                                "<td valign='top'>"+rsreg.getString("png_jawab")+"</td>"+
-                                                "<td valign='top'>"+rujukandari+" "+alamatrujukandari+"</td>"+
-                                                "<td valign='top'>"+
-                                                    "<table width='100%' border='0'>"); 
-                                    }
                                     pspenyakit=koneksi.prepareStatement(
                                             "select diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit from diagnosa_pasien inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit where diagnosa_pasien.status='Ralan' and diagnosa_pasien.no_rawat=?");
                                     try {
