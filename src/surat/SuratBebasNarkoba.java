@@ -58,8 +58,8 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         setSize(628,674);
         
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Surat Sakit","No.Rawat","No.R.M.","Nama Pasien","Tanggal Surat","Kategori","KD Dokter","Dokter","Keperluan",
-            "Opiat/Morphin","Ganja/Canabis","Amphetamin","Methampetamin","Benzodiazepin","Cocain"
+            "No.SKBN","No.Rawat","No.R.M.","Nama Pasien","Tanggal Surat","Kategori","KD Dokter","Dokter","Keperluan",
+            "Opiat/Morphin","Ganja/Canabis","Amphetamin","Methampetamin","Benzodiazepin","Cocain","Kesimpulan"
             
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -70,7 +70,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 15; i++) {
+        for (i = 0; i < 16; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -103,6 +103,8 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
                 column.setPreferredWidth(85);
             }else if(i==14){
                 column.setPreferredWidth(65);
+            }else if(i==15){
+                column.setPreferredWidth(85);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -179,6 +181,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         MnCetakSuratSKBN1 = new javax.swing.JMenuItem();
         MnCetakSuratSKBN2 = new javax.swing.JMenuItem();
         MnCetakSuratSKBN3 = new javax.swing.JMenuItem();
+        MnCetakSuratSKBN4 = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -231,6 +234,8 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         hasil5 = new widget.ComboBox();
         jLabel27 = new widget.Label();
         hasil6 = new widget.ComboBox();
+        kesimpulan = new widget.ComboBox();
+        jLabel28 = new widget.Label();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -290,6 +295,20 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnCetakSuratSKBN3);
+
+        MnCetakSuratSKBN4.setBackground(new java.awt.Color(250, 250, 250));
+        MnCetakSuratSKBN4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSuratSKBN4.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSuratSKBN4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSuratSKBN4.setText("Cetak SKBN 5");
+        MnCetakSuratSKBN4.setName("MnCetakSuratSKBN4"); // NOI18N
+        MnCetakSuratSKBN4.setPreferredSize(new java.awt.Dimension(140, 26));
+        MnCetakSuratSKBN4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSuratSKBN4ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnCetakSuratSKBN4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -469,7 +488,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2020" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-09-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -483,7 +502,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2020" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-09-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -603,7 +622,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         jLabel18.setBounds(511, 40, 100, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2020" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-09-2024" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -780,6 +799,21 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         FormInput.add(hasil6);
         hasil6.setBounds(615, 130, 100, 23);
 
+        kesimpulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NEGATIF", "POSITIF" }));
+        kesimpulan.setName("kesimpulan"); // NOI18N
+        kesimpulan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                kesimpulanKeyPressed(evt);
+            }
+        });
+        FormInput.add(kesimpulan);
+        kesimpulan.setBounds(820, 130, 100, 23);
+
+        jLabel28.setText("Kesimpulan :");
+        jLabel28.setName("jLabel28"); // NOI18N
+        FormInput.add(jLabel28);
+        jLabel28.setBounds(720, 130, 95, 23);
+
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -840,15 +874,15 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
         }else{
-            if(Sequel.menyimpantf("surat_skbn","?,?,?,?,?,?,?,?,?,?,?,?","No.Surat SKBN",12,new String[]{
+            if(Sequel.menyimpantf("surat_skbn","?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat SKBN",13,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Kategori.getSelectedItem().toString(),KdDok.getText(),
                     Keperluan.getText(),hasil1.getSelectedItem().toString(),hasil2.getSelectedItem().toString(),hasil3.getSelectedItem().toString(),
-                    hasil4.getSelectedItem().toString(),hasil5.getSelectedItem().toString(),hasil6.getSelectedItem().toString()
+                    hasil4.getSelectedItem().toString(),hasil5.getSelectedItem().toString(),hasil6.getSelectedItem().toString(),kesimpulan.getSelectedItem().toString()
                 })==true){
                 tabMode.addRow(new String[]{
                     NoSurat.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Kategori.getSelectedItem().toString(),
                     KdDok.getText(),TDokter.getText(),Keperluan.getText(),hasil1.getSelectedItem().toString(),hasil2.getSelectedItem().toString(),hasil3.getSelectedItem().toString(),
-                    hasil4.getSelectedItem().toString(),hasil5.getSelectedItem().toString(),hasil6.getSelectedItem().toString()
+                    hasil4.getSelectedItem().toString(),hasil5.getSelectedItem().toString(),hasil6.getSelectedItem().toString(),kesimpulan.getSelectedItem().toString()
                 });
                 LCount.setText(""+tabMode.getRowCount());
                 emptTeks();
@@ -910,9 +944,9 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
             Valid.textKosong(Keperluan,"Keperluan");
         }else{    
             if(tbObat.getSelectedRow()!= -1){
-                if(Sequel.mengedittf("surat_skbn","no_surat=?","no_surat=?,no_rawat=?,tanggalsurat=?,kategori=?,kd_dokter=?,keperluan=?,opiat=?,ganja=?,amphetamin=?,methamphetamin=?,benzodiazepin=?,cocain=?",13,new String[]{
+                if(Sequel.mengedittf("surat_skbn","no_surat=?","no_surat=?,no_rawat=?,tanggalsurat=?,kategori=?,kd_dokter=?,keperluan=?,opiat=?,ganja=?,amphetamin=?,methamphetamin=?,benzodiazepin=?,cocain=?,kesimpulan=?",14,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Kategori.getSelectedItem().toString(),KdDok.getText(),Keperluan.getText(),hasil1.getSelectedItem().toString(),
-                    hasil2.getSelectedItem().toString(),hasil3.getSelectedItem().toString(),hasil4.getSelectedItem().toString(),hasil5.getSelectedItem().toString(),hasil6.getSelectedItem().toString(),
+                    hasil2.getSelectedItem().toString(),hasil3.getSelectedItem().toString(),hasil4.getSelectedItem().toString(),hasil5.getSelectedItem().toString(),hasil6.getSelectedItem().toString(),kesimpulan.getSelectedItem().toString(),
                     tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
                 })==true){
                     tbObat.setValueAt(NoSurat.getText(),tbObat.getSelectedRow(),0);
@@ -930,6 +964,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
                     tbObat.setValueAt(hasil4.getSelectedItem().toString(),tbObat.getSelectedRow(),12);
                     tbObat.setValueAt(hasil5.getSelectedItem().toString(),tbObat.getSelectedRow(),13);
                     tbObat.setValueAt(hasil6.getSelectedItem().toString(),tbObat.getSelectedRow(),14);
+                    tbObat.setValueAt(kesimpulan.getSelectedItem().toString(),tbObat.getSelectedRow(),15);
                     emptTeks();
                 }
             }
@@ -1277,6 +1312,19 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         Valid.pindah(evt,Kategori,Keperluan);
     }//GEN-LAST:event_btnDokterKeyPressed
 
+    private void MnCetakSuratSKBN4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSKBN4ActionPerformed
+        // TODO add your handling code here:
+        if(TPasien.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu pasien...!!!");
+        } else {
+            Valid.panggilUrl("skbsn/SuratKetNarkoba.php?no_surat="+NoSurat.getText().toString()+"&rm="+TNoRM.getText().toString()+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+        }
+    }//GEN-LAST:event_MnCetakSuratSKBN4ActionPerformed
+
+    private void kesimpulanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kesimpulanKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kesimpulanKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1314,6 +1362,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
     private javax.swing.JMenuItem MnCetakSuratSKBN1;
     private javax.swing.JMenuItem MnCetakSuratSKBN2;
     private javax.swing.JMenuItem MnCetakSuratSKBN3;
+    private javax.swing.JMenuItem MnCetakSuratSKBN4;
     private widget.TextBox NoSurat;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;
@@ -1342,6 +1391,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
     private widget.Label jLabel25;
     private widget.Label jLabel26;
     private widget.Label jLabel27;
+    private widget.Label jLabel28;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
     private widget.Label jLabel5;
@@ -1349,6 +1399,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
     private widget.Label jLabel7;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.ComboBox kesimpulan;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private widget.Table tbObat;
