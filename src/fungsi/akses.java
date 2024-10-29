@@ -233,7 +233,7 @@ public final class akses {
             pcare_cek_alergi=false,pcare_cek_prognosa=false,data_sasaran_usiaproduktif=false,data_sasaran_usialansia=false,skrining_perilaku_merokok_sekolah_remaja=false,
             skrining_kekerasan_pada_perempuan=false,skrining_obesitas=false,skrining_risiko_kanker_payudara=false,skrining_risiko_kanker_paru=false,skrining_tbc=false,
             skrining_kesehatan_gigi_mulut_remaja=false,penilaian_awal_keperawatan_ranap_bayi=false,booking_mcu_perusahaan=false,catatan_observasi_restrain_nonfarma=false,
-            catatan_observasi_ventilator=false,catatan_anestesi_sedasi=false;
+            catatan_observasi_ventilator=false,catatan_anestesi_sedasi=false,satu_sehat_kirim_rencana_kontrol=false,satu_sehat_kirim_questionnaire_request=false;
     
     public static void setData(String user, String pass) {
         try {        
@@ -1319,6 +1319,8 @@ public final class akses {
                         akses.catatan_observasi_restrain_nonfarma=true;
                         akses.catatan_observasi_ventilator=true;
                         akses.catatan_anestesi_sedasi=true;
+                        akses.satu_sehat_kirim_rencana_kontrol=true;
+                        akses.satu_sehat_kirim_questionnaire_request=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -2388,6 +2390,8 @@ public final class akses {
                         akses.catatan_observasi_restrain_nonfarma=rs2.getBoolean("catatan_observasi_restrain_nonfarma");
                         akses.catatan_observasi_ventilator=rs2.getBoolean("catatan_observasi_ventilator");
                         akses.catatan_anestesi_sedasi=rs2.getBoolean("catatan_anestesi_sedasi");
+                        akses.satu_sehat_kirim_rencana_kontrol=rs2.getBoolean("satu_sehat_kirim_rencana_kontrol");
+                        akses.satu_sehat_kirim_questionnaire_request=rs2.getBoolean("satu_sehat_kirim_questionnaire_request");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";                  
                         akses.penyakit= false;
@@ -3455,6 +3459,8 @@ public final class akses {
                         akses.catatan_observasi_restrain_nonfarma=false;
                         akses.catatan_observasi_ventilator=false;
                         akses.catatan_anestesi_sedasi=false;
+                        akses.satu_sehat_kirim_rencana_kontrol=false;
+                        akses.satu_sehat_kirim_questionnaire_request=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -4545,6 +4551,8 @@ public final class akses {
         akses.catatan_observasi_restrain_nonfarma=false;
         akses.catatan_observasi_ventilator=false;
         akses.catatan_anestesi_sedasi=false;
+        akses.satu_sehat_kirim_rencana_kontrol=false;
+        akses.satu_sehat_kirim_questionnaire_request=false;
     }
     
     public static int getjml1() {return akses.jml1;}    
@@ -5651,4 +5659,6 @@ public final class akses {
     public static boolean getcatatan_observasi_restrain_nonfarma(){return akses.catatan_observasi_restrain_nonfarma;}
     public static boolean getcatatan_observasi_ventilator(){return akses.catatan_observasi_ventilator;}
     public static boolean getcatatan_anestesi_sedasi(){return akses.catatan_anestesi_sedasi;}
+    public static boolean getsatu_sehat_kirim_rencana_kontrol(){return akses.satu_sehat_kirim_rencana_kontrol;}
+    public static boolean getsatu_sehat_kirim_questionnaire_request(){return akses.satu_sehat_kirim_questionnaire_request;}
 }   
