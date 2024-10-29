@@ -486,6 +486,7 @@ import bridging.SatuSehatKirimObservationLabPK;
 import bridging.SatuSehatKirimObservationRadiologi;
 import bridging.SatuSehatKirimObservationTTV;
 import bridging.SatuSehatKirimProcedure;
+import bridging.SatuSehatKirimRencanaKontrol;
 import bridging.SatuSehatKirimServiceRequestLabMB;
 import bridging.SatuSehatKirimServiceRequestLabPK;
 import bridging.SatuSehatKirimServiceRequestRadiologi;
@@ -21778,6 +21779,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
+    
+    private void btnKirimRencanaKontrolSatuSehatActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SatuSehatKirimRencanaKontrol aplikasi=new SatuSehatKirimRencanaKontrol(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
             
     /**
     * @param args the command line arguments
@@ -22473,7 +22486,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnMandiriKodeTransaksiTujuanTRansfer,btnSKPRekapitulasiPenilaian,btnPCareReferensiAlergi,btnPCareReferensiPrognosa,btnKonsultasiMedik,btnDataSasaranUsiaProduktif,
             btnDataSasaranUsiaLansia,btnSkriningMerokokUsiaSekolah,btnSkriningKekerasanPadaPerempuan,btnSkriningObesitas,btnSkriningRisikoKankerPayudara,btnSkriningRisikoKankerParu,
             btnSkriningKesehatanGigiMulutRemaja,btnSkriningTBC,btnPenilaianAwalKeperawatanRanapBayiAnak,btnBookingMCUPerusahaan,btnCatatanObservasiRestrainNonFramakologi,
-            btnCatatanObservasiVentilator;
+            btnCatatanObservasiVentilator,btnKirimRencanaKontrolSatuSehat;
     
     public void isWall(){
         try{            
@@ -25683,6 +25696,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getsatu_sehat_kirim_diagnosticreport_labmb()==true){
                 Panelmenu.add(btnKirimDiagnosticReportLabMBSatuSehat);
+                jmlmenu++;
+            }
+            
+            if(akses.getsatu_sehat_kirim_rencana_kontrol()==true){
+                Panelmenu.add(btnKirimRencanaKontrolSatuSehat);
                 jmlmenu++;
             }
             
@@ -30935,6 +30953,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnKirimDiagnosticReportLabMBSatuSehat);
             jmlmenu++;
         }
+        
+        if(akses.getsatu_sehat_kirim_rencana_kontrol()==true){
+                Panelmenu.add(btnKirimRencanaKontrolSatuSehat);
+                jmlmenu++;
+            }
         
         if(akses.getreferensi_poli_mobilejknfktp()==true){
             Panelmenu.add(btnReferensiPoliMobileJKNFKTP);
@@ -37410,6 +37433,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getsatu_sehat_kirim_diagnosticreport_labmb()==true){
             if(btnKirimDiagnosticReportLabMBSatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnKirimDiagnosticReportLabMBSatuSehat);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getsatu_sehat_kirim_rencana_kontrol()==true){
+            if(btnKirimRencanaKontrolSatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnKirimRencanaKontrolSatuSehat);
                 jmlmenu++;
             }                
         }
@@ -45171,5 +45201,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnBookingMCUPerusahaan.setName("btnBookingMCUPerusahaan"); 
         btnBookingMCUPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBookingMCUPerusahaan.addActionListener(this::btnBookingMCUPerusahaanActionPerformed);
+        
+        btnKirimRencanaKontrolSatuSehat = new widget.ButtonBig();
+        btnKirimRencanaKontrolSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
+        btnKirimRencanaKontrolSatuSehat.setText("Kirim Rencana Kontrol Satu Sehat");
+        btnKirimRencanaKontrolSatuSehat.setIconTextGap(0);
+        btnKirimRencanaKontrolSatuSehat.setName("btnKirimDiagnosticReportLabMBSatuSehat"); 
+        btnKirimRencanaKontrolSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKirimRencanaKontrolSatuSehat.addActionListener(this::btnKirimRencanaKontrolSatuSehatActionPerformed);
+        
     }
 }
