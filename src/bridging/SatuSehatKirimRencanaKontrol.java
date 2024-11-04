@@ -873,7 +873,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                                 root = mapper.readTree(json);
                                 response = root.path("id");
                                 if (!response.asText().equals("")) {
-                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[]{
+                                    Sequel.menyimpan("satu_sehat_kirim_rencana_kontrol", "?,?,?", "RTL", 3, new String[]{
                                         tbKamar.getValueAt(i, 2).toString(), tbKamar.getValueAt(i, 17).toString(), response.asText()
                                     }
                                     );
@@ -990,7 +990,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                                 root = mapper.readTree(json);
                                 response = root.path("id");
                                 if (!response.asText().equals("")) {
-                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[]{
+                                    Sequel.menyimpan("satu_sehat_kirim_rencana_kontrol", "?,?,?", "RTL", 3, new String[]{
                                         tbKamar1.getValueAt(i, 2).toString(), tbKamar1.getValueAt(i, 17).toString(), response.asText()
                                     });
                                 }
@@ -1107,7 +1107,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                                 root = mapper.readTree(json);
                                 response = root.path("id");
                                 if (!response.asText().equals("")) {
-                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[]{
+                                    Sequel.menyimpan("satu_sehat_kirim_rencana_kontrol", "?,?,?", "RTL", 3, new String[]{
                                         tbKamar2.getValueAt(i, 2).toString(), tbKamar2.getValueAt(i, 17).toString(), response.asText()
                                     });
                                 }
@@ -1236,7 +1236,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                                 root = mapper.readTree(json);
                                 response = root.path("id");
                                 if (!response.asText().equals("")) {
-                                    Sequel.menyimpan("satu_sehat_rtl", "?,?,?", "RTL", 3, new String[]{
+                                    Sequel.menyimpan("satu_sehat_kirim_rencana_kontrol", "?,?,?", "RTL", 3, new String[]{
                                         tbKamar3.getValueAt(i, 2).toString(), tbKamar3.getValueAt(i, 16).toString(), response.asText()
                                     });
                                 }
@@ -1462,7 +1462,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
             case 0:
                 String belumterkirim = "";
                 if (ChkBelumTerkirim.isSelected() == true) {
-                    belumterkirim = " satu_sehat_rtl.id_rtl IS NULL and ";
+                    belumterkirim = " satu_sehat_kirim_rencana_kontrol.id_rtl IS NULL and ";
                 } else {
                     belumterkirim = "";
                 }
@@ -1483,7 +1483,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                             + "	bridging_surat_kontrol_bpjs.no_surat,\n"
                             + "	bridging_surat_kontrol_bpjs.tgl_surat,\n"
                             + "	bridging_surat_kontrol_bpjs.tgl_rencana,\n"
-                            + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl, reg_periksa.jam_reg, reg_periksa.no_rawat \n"
+                            + "	ifnull( satu_sehat_kirim_rencana_kontrol.id_rtl, '' ) AS id_rtl, reg_periksa.jam_reg, reg_periksa.no_rawat \n"
                             + "FROM\n"
                             + "	reg_periksa\n"
                             + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
@@ -1496,8 +1496,8 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                             + "	INNER JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat\n"
                             + "	INNER JOIN penyakit ON diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit\n"
                             + "	INNER JOIN poliklinik ON satu_sehat_mapping_lokasi_ralan.kd_poli = poliklinik.kd_poli\n"
-                            + "	LEFT JOIN satu_sehat_rtl ON reg_periksa.no_rawat = satu_sehat_rtl.no_rawat \n"
-                            + "	AND bridging_surat_kontrol_bpjs.no_surat = satu_sehat_rtl.nosurkon \n"
+                            + "	LEFT JOIN satu_sehat_kirim_rencana_kontrol ON reg_periksa.no_rawat = satu_sehat_kirim_rencana_kontrol.no_rawat \n"
+                            + "	AND bridging_surat_kontrol_bpjs.no_surat = satu_sehat_kirim_rencana_kontrol.nosurkon \n"
                             + "where " + belumterkirim + " reg_periksa.tgl_registrasi between ? and ? "
                             + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
                             + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
@@ -1579,7 +1579,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
 
                 String belumterkirim1 = "";
                 if (ChkBelumTerkirim.isSelected() == true) {
-                    belumterkirim1 = " satu_sehat_rtl.id_rtl IS NULL and ";
+                    belumterkirim1 = " satu_sehat_kirim_rencana_kontrol.id_rtl IS NULL and ";
                 } else {
                     belumterkirim1 = "";
                 }
@@ -1604,7 +1604,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                             + "	poliklinik.nm_poli,\n"
                             + "	diagnosa_pasien.kd_penyakit,\n"
                             + "	penyakit.nm_penyakit,\n"
-                            + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl \n"
+                            + "	ifnull( satu_sehat_kirim_rencana_kontrol.id_rtl, '' ) AS id_rtl \n"
                             + "FROM\n"
                             + "	reg_periksa\n"
                             + "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis\n"
@@ -1615,7 +1615,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                             + "	INNER JOIN poliklinik ON satu_sehat_mapping_lokasi_ralan.kd_poli = poliklinik.kd_poli\n"
                             + "	INNER JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat\n"
                             + "	INNER JOIN penyakit ON diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit\n"
-                            + "	LEFT JOIN satu_sehat_rtl ON skdp_bpjs_new.no_rawat = satu_sehat_rtl.no_rawat\n"
+                            + "	LEFT JOIN satu_sehat_kirim_rencana_kontrol ON skdp_bpjs_new.no_rawat = satu_sehat_kirim_rencana_kontrol.no_rawat\n"
                             + "	INNER JOIN dokter ON skdp_bpjs_new.kd_dokter = dokter.kd_dokter\n"
                             + "	INNER JOIN pegawai ON dokter.kd_dokter = pegawai.nik  \n"
                             + "where " + belumterkirim1 + " reg_periksa.tgl_registrasi between ? and ? "
@@ -1700,7 +1700,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
             case 2:
                 String belumterkirim2 = "";
                 if (ChkBelumTerkirim.isSelected() == true) {
-                    belumterkirim2 = " satu_sehat_rtl.id_rtl IS NULL and ";
+                    belumterkirim2 = " satu_sehat_kirim_rencana_kontrol.id_rtl IS NULL and ";
                 } else {
                     belumterkirim2 = "";
                 }
@@ -1726,7 +1726,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                             + "	dokter.nm_dokter,\n"
                             + "	diagnosa_pasien.kd_penyakit,\n"
                             + "	penyakit.nm_penyakit,\n"
-                            + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl \n"
+                            + "	ifnull( satu_sehat_kirim_rencana_kontrol.id_rtl, '' ) AS id_rtl \n"
                             + "FROM\n"
                             + "	reg_periksa\n"
                             + "	INNER JOIN bridging_surat_pri_bpjs ON reg_periksa.no_rawat = bridging_surat_pri_bpjs.no_rawat\n"
@@ -1740,7 +1740,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                             + "	INNER JOIN pegawai ON dokter.kd_dokter = pegawai.nik\n"
                             + "	INNER JOIN diagnosa_pasien ON reg_periksa.no_rawat = diagnosa_pasien.no_rawat\n"
                             + "	INNER JOIN penyakit ON diagnosa_pasien.kd_penyakit = penyakit.kd_penyakit\n"
-                            + "	LEFT JOIN satu_sehat_rtl ON reg_periksa.no_rawat = satu_sehat_rtl.no_rawat   \n"
+                            + "	LEFT JOIN satu_sehat_kirim_rencana_kontrol ON reg_periksa.no_rawat = satu_sehat_kirim_rencana_kontrol.no_rawat   \n"
                             + "where " + belumterkirim2 + " reg_periksa.tgl_registrasi between ? and ? "
                             + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
                             + "pasien.nm_pasien like ? or pasien.no_ktp like ? "
@@ -1825,7 +1825,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
             case 3:
                 String belumterkirim3 = "";
                 if (ChkBelumTerkirim.isSelected() == true) {
-                    belumterkirim3 = " satu_sehat_rtl.id_rtl IS NULL and ";
+                    belumterkirim3 = " satu_sehat_kirim_rencana_kontrol.id_rtl IS NULL and ";
                 } else {
                     belumterkirim3 = "";
                 }
@@ -1854,7 +1854,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                             + "	maping_dokter_dpjpvclaim.kd_dokter_bpjs,\n"
                             + "	maping_dokter_dpjpvclaim.nm_dokter_bpjs,\n"
                             + "	satu_sehat_encounter.id_encounter,\n"
-                            + "	ifnull( satu_sehat_rtl.id_rtl, '' ) AS id_rtl,\n"
+                            + "	ifnull( satu_sehat_kirim_rencana_kontrol.id_rtl, '' ) AS id_rtl,\n"
                             + "	satu_sehat_mapping_lokasi_ralan.id_organisasi_satusehat \n"
                             + "FROM\n"
                             + "	reg_periksa\n"
@@ -1864,7 +1864,7 @@ public final class SatuSehatKirimRencanaKontrol extends javax.swing.JDialog {
                             + "	INNER JOIN maping_dokter_dpjpvclaim ON bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs\n"
                             + "	INNER JOIN pegawai ON maping_dokter_dpjpvclaim.kd_dokter = pegawai.nik\n"
                             + "	INNER JOIN satu_sehat_encounter ON reg_periksa.no_rawat = satu_sehat_encounter.no_rawat\n"
-                            + "	LEFT JOIN satu_sehat_rtl ON reg_periksa.no_rawat = satu_sehat_rtl.no_rawat\n"
+                            + "	LEFT JOIN satu_sehat_kirim_rencana_kontrol ON reg_periksa.no_rawat = satu_sehat_kirim_rencana_kontrol.no_rawat\n"
                             + "	INNER JOIN satu_sehat_mapping_lokasi_ralan ON reg_periksa.kd_poli = satu_sehat_mapping_lokasi_ralan.kd_poli \n"
                             + "where " + belumterkirim3 + " reg_periksa.tgl_registrasi between ? and ? "
                             + (TCari.getText().equals("") ? "" : "and (reg_periksa.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "
