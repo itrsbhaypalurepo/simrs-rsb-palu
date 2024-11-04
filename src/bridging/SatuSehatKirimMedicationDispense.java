@@ -429,7 +429,7 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
         jLabel15.setPreferredSize(new java.awt.Dimension(85, 23));
         panelGlass9.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-01-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -442,7 +442,7 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass9.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-01-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1015,6 +1015,8 @@ public final class SatuSehatKirimMedicationDispense extends javax.swing.JDialog 
     // End of variables declaration//GEN-END:variables
     
     private void tampil() {
+        String belumTerkirim = "";
+        
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
