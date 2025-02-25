@@ -41,7 +41,7 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
     private ResultSet rs,rsakunbayar;
     private double all=0,bayar=0;
     private int i,kolom=0,no=0,kolom2=0;
-    private String shift="",tanggal2="",petugas="";
+    private String petugas="";
     private StringBuilder htmlContent;
     private String[] namabayar,akunrekening,namarekening;
     private double[] totalbayar,totalbayar2;
@@ -185,6 +185,11 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pembayaran Per Akun Bayar 4 ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
@@ -579,6 +584,32 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TabRawatMouseClicked
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try{        
+            htmlContent = new StringBuilder();
+            htmlContent.append(                             
+                "<tr class='head'>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='27px'>No.</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='110px'>Tanggal</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>No.Rawat/No.Nota</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='220px'>Nama Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>Jenis/Cara Bayar</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>Pembayaran</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='130px'>Petugas</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='400px'>Akun Bayar</td>"+
+                "</tr>"
+            );           
+            LoadHTML.setText(
+                    "<html>"+
+                      "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                       htmlContent.toString()+
+                      "</table>"+
+                    "</html>");
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     /**
     * @param args the command line arguments
     */
@@ -645,11 +676,13 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
             );   
             
             kolom=0;
-            i=Sequel.cariInteger("select count(akun_bayar.nama_bayar) from akun_bayar");
-            namabayar=new String[i];
             psakunbayar=koneksi.prepareStatement("select akun_bayar.nama_bayar from akun_bayar order by akun_bayar.nama_bayar");
             try {
                 rsakunbayar=psakunbayar.executeQuery();
+                rsakunbayar.last();
+                i=rsakunbayar.getRow();
+                namabayar=new String[i];
+                rsakunbayar.beforeFirst();
                 while(rsakunbayar.next()){
                     namabayar[kolom]=rsakunbayar.getString("nama_bayar");
                     kolom++;
@@ -708,8 +741,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -761,8 +794,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -812,8 +845,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -863,8 +896,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -878,12 +911,14 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
             } 
             
             kolom2=0;
-            i=Sequel.cariInteger("select count(rekening.kd_rek) from rekening where rekening.kd_rek in (select kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain group by kategori_pemasukan_lain.kd_rek2)");
-            akunrekening=new String[i];
-            namarekening=new String[i];
             psakunbayar=koneksi.prepareStatement("select rekening.kd_rek,rekening.nm_rek from rekening where rekening.kd_rek in (select kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain group by kategori_pemasukan_lain.kd_rek2) order by rekening.nm_rek");
             try {
                 rsakunbayar=psakunbayar.executeQuery();
+                rsakunbayar.last();
+                i=rsakunbayar.getRow();
+                akunrekening=new String[i];
+                namarekening=new String[i];
+                rsakunbayar.beforeFirst();
                 while(rsakunbayar.next()){
                     akunrekening[kolom2]=rsakunbayar.getString("kd_rek");
                     namarekening[kolom2]=rsakunbayar.getString("nm_rek");
@@ -939,8 +974,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1017,11 +1052,13 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
             );   
             
             kolom=0;
-            i=Sequel.cariInteger("select count(akun_bayar.nama_bayar) from akun_bayar");
-            namabayar=new String[i];
             psakunbayar=koneksi.prepareStatement("select akun_bayar.nama_bayar from akun_bayar order by akun_bayar.nama_bayar");
             try {
                 rsakunbayar=psakunbayar.executeQuery();
+                rsakunbayar.last();
+                i=rsakunbayar.getRow();
+                namabayar=new String[i];
+                rsakunbayar.beforeFirst();
                 while(rsakunbayar.next()){
                     namabayar[kolom]=rsakunbayar.getString("nama_bayar");
                     kolom++;
@@ -1080,8 +1117,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1133,8 +1170,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1184,8 +1221,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1235,8 +1272,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1250,12 +1287,14 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
             } 
             
             kolom2=0;
-            i=Sequel.cariInteger("select count(rekening.kd_rek) from rekening where rekening.kd_rek in (select kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain group by kategori_pemasukan_lain.kd_rek2)");
-            akunrekening=new String[i];
-            namarekening=new String[i];
             psakunbayar=koneksi.prepareStatement("select rekening.kd_rek,rekening.nm_rek from rekening where rekening.kd_rek in (select kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain group by kategori_pemasukan_lain.kd_rek2) order by rekening.nm_rek");
             try {
                 rsakunbayar=psakunbayar.executeQuery();
+                rsakunbayar.last();
+                i=rsakunbayar.getRow();
+                akunrekening=new String[i];
+                namarekening=new String[i];
+                rsakunbayar.beforeFirst();
                 while(rsakunbayar.next()){
                     akunrekening[kolom2]=rsakunbayar.getString("kd_rek");
                     namarekening[kolom2]=rsakunbayar.getString("nm_rek");
@@ -1311,8 +1350,8 @@ public final class DlgPembayaranPerAKunBayar4 extends javax.swing.JDialog {
                                 "</td>"+
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);

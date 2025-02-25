@@ -957,6 +957,16 @@ public class koneksiDB {
         return var;
     }
     
+    public static String TAMPILKANCOPYRESEPDOKTERLAIN(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("TAMPILKANCOPYRESEPDOKTERLAIN");
+        }catch(Exception e){
+            var="no"; 
+        }
+        return var;
+    }
+    
     public static String HPPFARMASI(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -1255,6 +1265,16 @@ public class koneksiDB {
         return var;
     }
     
+    public static String JADIKANBOOKINGSURATKONTROL(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("JADIKANBOOKINGSURATKONTROL");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
     public static String JADIKANBOOKINGSURATKONTROLAPIBPJS(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -1521,7 +1541,7 @@ public class koneksiDB {
             var=prop.getProperty("ADDANTRIANAPIMOBILEJKNFKTP");
         }catch(Exception e){
             var=""; 
-}
+        }
         return var;
     }
     
@@ -1609,6 +1629,36 @@ public class koneksiDB {
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=prop.getProperty("URLAKSESFILEESIGN");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String URLAPISERTISIGN(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("URLAPISERTISIGN");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIKEYSERTISIGN(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=EnkripsiAES.decrypt(prop.getProperty("APIKEYSERTISIGN"));
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String URLDOKUMENSERTISIGN(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("URLDOKUMENSERTISIGN");
         }catch(Exception e){
             var=""; 
         }
