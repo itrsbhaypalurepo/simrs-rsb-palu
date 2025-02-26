@@ -47,9 +47,7 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private IPSRSCariSuplier suplier=new IPSRSCariSuplier(null,false);
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
-    private MandiriCariKodeTransaksiTujuanTransfer kodetransaksibank=new MandiriCariKodeTransaksiTujuanTransfer(null, false);
     private int row=0,i;
     private String koderekening="",tanggaldatang="",tanggaltempo="",Bayar_Pemesanan_Non_Medis=Sequel.cariIsi("select set_akun.Bayar_Pemesanan_Non_Medis from set_akun"),Host_to_Host_Bank_Mandiri="",Akun_Biaya_Mandiri="",kodemcm="",norekening="";
     private double sisahutang=0,cicilan=0,bayar=0;
@@ -161,43 +159,6 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
             });
         }  
         
-        suplier.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(suplier.getTable().getSelectedRow()!= -1){
-                    KodeSuplier.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());
-                    NamaSuplier.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),1).toString());
-                    tampil();
-                }      
-                KodeSuplier.requestFocus();
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {suplier.emptTeks();}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });   
-        
-        suplier.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    suplier.dispose();
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-        
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -220,45 +181,6 @@ public final class KeuanganHutangNonMedisBelumLunas extends javax.swing.JDialog 
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });   
-        
-        kodetransaksibank.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(kodetransaksibank.getTable().getSelectedRow()!= -1){                   
-                    KodeMetode.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),0).toString());   
-                    MetodePembayaran.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),1).toString());   
-                    BiayaTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),2).toString());   
-                    KodeBank.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),3).toString());   
-                    BankTujuan.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),4).toString());   
-                    KodeTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),5).toString());                  
-                }                
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
-        kodetransaksibank.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    kodetransaksibank.dispose();
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
         
         ChkAccor.setSelected(false);
         isPhoto();
@@ -1161,6 +1083,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }else{
                 tampilAkunBayar();
             }
+        } catch (Exception e) {
+        }
+        
+        try {
             if(Valid.daysOld("./cache/akunbankmandiri.iyem")<30){
                 tampilAkunBankMandiri2();
             }else{
@@ -1181,6 +1107,43 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_KodeSuplierKeyPressed
 
     private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
+        IPSRSCariSuplier suplier=new IPSRSCariSuplier(null,false);
+        suplier.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(suplier.getTable().getSelectedRow()!= -1){
+                    KodeSuplier.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());
+                    NamaSuplier.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),1).toString());
+                    tampil();
+                }      
+                KodeSuplier.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {suplier.emptTeks();}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });   
+        
+        suplier.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    suplier.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
         suplier.isCek();
         suplier.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         suplier.setLocationRelativeTo(internalFrame1);
@@ -1270,15 +1233,21 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                         Sequel.mengedit("ipsrspemesanan","no_faktur='"+tabMode.getValueAt(i,1).toString()+"'","status='Belum Lunas'");
                                     } 
                                     Sequel.queryu("delete from tampjurnal");
-                                    Sequel.menyimpan("tampjurnal","?,?,?,?","Rekening",4,new String[]{
+                                    if(Sequel.menyimpantf2("tampjurnal","?,?,?,?","Rekening",4,new String[]{
                                         Bayar_Pemesanan_Non_Medis,"HUTANG BARANG NON MEDIS",tabMode.getValueAt(i,10).toString(),"0"
-                                    });                     
-                                    Sequel.menyimpan("tampjurnal","?,?,?,?","Rekening",4,new String[]{
-                                        koderekening,AkunBayar.getSelectedItem().toString(),"0",tabMode.getValueAt(i,10).toString()
-                                    });    
-                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG NON MEDIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                    })==false){
                                         sukses=false;
-                                    }                           
+                                    }                      
+                                    if(Sequel.menyimpantf2("tampjurnal","?,?,?,?","Rekening",4,new String[]{
+                                        koderekening,AkunBayar.getSelectedItem().toString(),"0",tabMode.getValueAt(i,10).toString()
+                                    })==false){
+                                        sukses=false;
+                                    }   
+                                    if(sukses==true){
+                                        if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG NON MEDIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                            sukses=false;
+                                        } 
+                                    }                          
                                 }else{
                                     sukses=false;
                                 }
@@ -1500,19 +1469,27 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 }else{
                                     Sequel.queryu("delete from tampjurnal");
                                     if(Valid.SetInteger(BiayaTransaksi.getText())>0){
-                                        Sequel.menyimpan("tampjurnal","?,?,?,?","Rekening",4,new String[]{
+                                        if(Sequel.menyimpantf2("tampjurnal","?,?,?,?","Rekening",4,new String[]{
                                             Akun_Biaya_Mandiri,"BIAYA TRANSAKSI",BiayaTransaksi.getText(),"0"
-                                        });
+                                        })==false){
+                                            sukses=false;
+                                        } 
                                     }
-                                    Sequel.menyimpan("tampjurnal","?,?,?,?","Rekening",4,new String[]{
+                                    if(Sequel.menyimpantf2("tampjurnal","?,?,?,?","Rekening",4,new String[]{
                                         Bayar_Pemesanan_Non_Medis,"HUTANG BARANG NON MEDIS",tabMode.getValueAt(i,10).toString(),"0"
-                                    });                     
-                                    Sequel.menyimpan("tampjurnal","?,?,?,?","Rekening",4,new String[]{
-                                        koderekening,AkunBayar.getSelectedItem().toString(),"0",(Valid.SetAngka(BiayaTransaksi.getText())+Valid.SetAngka(tabMode.getValueAt(i,10).toString()))+""
-                                    });    
-                                    if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG NON MEDIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                    })==false){
                                         sukses=false;
-                                    } 
+                                    }                      
+                                    if(Sequel.menyimpantf2("tampjurnal","?,?,?,?","Rekening",4,new String[]{
+                                        koderekening,AkunBayar.getSelectedItem().toString(),"0",(Valid.SetAngka(BiayaTransaksi.getText())+Valid.SetAngka(tabMode.getValueAt(i,10).toString()))+""
+                                    })==false){
+                                        sukses=false;
+                                    }   
+                                    if(sukses==true){
+                                        if(jur.simpanJurnal(NoBukti.getText(),"U","BAYAR PELUNASAN HUTANG BARANG NON MEDIS NO.FAKTUR "+tabMode.getValueAt(i,1).toString()+", OLEH "+akses.getkode())==false){
+                                            sukses=false;
+                                        } 
+                                    }
                                 }                          
                             }else{
                                 sukses=false;
@@ -1572,6 +1549,45 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
     private void BtnMetodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMetodeActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        MandiriCariKodeTransaksiTujuanTransfer kodetransaksibank=new MandiriCariKodeTransaksiTujuanTransfer(null, false);
+        kodetransaksibank.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(kodetransaksibank.getTable().getSelectedRow()!= -1){                   
+                    KodeMetode.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),0).toString());   
+                    MetodePembayaran.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),1).toString());   
+                    BiayaTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),2).toString());   
+                    KodeBank.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),3).toString());   
+                    BankTujuan.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),4).toString());   
+                    KodeTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),5).toString());                  
+                }                
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        kodetransaksibank.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    kodetransaksibank.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
         kodetransaksibank.setCari(BankTujuan.getText());
         kodetransaksibank.isCek();
         kodetransaksibank.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1687,9 +1703,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     "select ipsrspemesanan.no_faktur,ipsrspemesanan.no_order,ipsrssuplier.nama_suplier, "+
                     "petugas.nama,ipsrspemesanan.tgl_tempo,ipsrspemesanan.tgl_pesan,ipsrspemesanan.tgl_faktur,ipsrspemesanan.tagihan,"+
                     "(SELECT ifnull(SUM(besar_bayar),0) FROM bayar_pemesanan_non_medis where bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur) as bayar, "+
-                    "ipsrssuplier.nama_bank,ipsrssuplier.rekening from ipsrspemesanan inner join ipsrssuplier inner join petugas "+
-                    "on ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier "+
-                    "and ipsrspemesanan.nip=petugas.nip where "+
+                    "ipsrssuplier.nama_bank,ipsrssuplier.rekening from ipsrspemesanan inner join ipsrssuplier on ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier "+
+                    "inner join petugas on ipsrspemesanan.nip=petugas.nip where "+
                     tanggaldatang+tanggaltempo+"(ipsrspemesanan.status='Belum Dibayar' or ipsrspemesanan.status='Belum Lunas') and ipsrssuplier.nama_suplier like ? "+
                     (TCari.getText().trim().equals("")?"":"and (ipsrspemesanan.no_faktur like ? or ipsrspemesanan.no_order like ? or ipsrspemesanan.tgl_tempo like ? or "+
                     "ipsrssuplier.nama_suplier like ? or petugas.nama like ?)")+" order by ipsrspemesanan.tgl_tempo ");
@@ -1837,7 +1852,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }
             myObj.close();
         } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);
+            if(ex.toString().contains("java.io.FileNotFoundException")){
+                tampilAkunBayar();
+            }else{
+                System.out.println("Notifikasi : "+ex);
+            }
         }
     } 
     

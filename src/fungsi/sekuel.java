@@ -642,6 +642,37 @@ public final class sekuel {
             }
         }
     }
+    
+    public boolean menyimpantf(String table,String isisimpan,String isiedit,String acuan_field){
+        bool=true;
+        try{            
+            ps=connect.prepareStatement("insert into "+table+" values("+isisimpan+")");
+            ps.executeUpdate();   
+            if(ps != null){
+                ps.close();
+            }  
+            SimpanTrack("insert into "+table+" values("+isisimpan+")");
+            bool=true;
+        }catch(Exception e){
+            if(e.toString().toLowerCase().contains("duplicate")){
+                try {
+                    ps=connect.prepareStatement("update "+table+" set "+isiedit+" where "+acuan_field);
+                    ps.executeUpdate();
+                    if(ps != null){
+                        ps.close();
+                    }  
+                    SimpanTrack("update "+table+" set "+isiedit+" where "+acuan_field);
+                    bool=true;
+                } catch (Exception ex) {
+                    bool=false;
+                    System.out.println("Notifikasi Edit : "+ex);
+                }
+            }else{
+               bool=false; 
+            }
+        }
+        return bool;
+    }
 
     public void menyimpan(String table,String value,String sama,JTextField AlmGb){
         try {
@@ -833,38 +864,6 @@ public final class sekuel {
         return bool;
     }
     
-    public boolean mengedittf2(String table,String acuan_field,String update,int i,String[] a){
-        bool=true;
-        try {
-            ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
-            try{
-                for(angka=1;angka<=i;angka++){
-                    ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate();       
-                bool=true;
-             }catch(Exception e){
-                bool=false;
-                System.out.println("Notifikasi : "+e);
-             }finally{
-                if(ps != null){
-                    ps.close();
-                }
-            }
-            if(AKTIFKANTRACKSQL.equals("yes")){
-                dicari="";
-                for(angka=1;angka<=i;angka++){
-                    dicari=dicari+"|"+a[angka-1];
-                }
-            }
-            SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
-        } catch (Exception e) {
-            bool=false;
-            System.out.println("Notifikasi : "+e);
-        }   
-        return bool;
-    }
-    
     public void mengedit(String table,String acuan_field,String update,int i,String[] a){
         try {
             ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
@@ -965,6 +964,38 @@ public final class sekuel {
                 bool=false;
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Periksa kembali data...!!!!");
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+            if(AKTIFKANTRACKSQL.equals("yes")){
+                dicari="";
+                for(angka=1;angka<=i;angka++){
+                    dicari=dicari+"|"+a[angka-1];
+                }
+            }
+            SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
+        } catch (Exception e) {
+            bool=false;
+            System.out.println("Notifikasi : "+e);
+        }   
+        return bool;
+    }
+    
+    public boolean mengedittf2(String table,String acuan_field,String update,int i,String[] a){
+        bool=true;
+        try {
+            ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+            try{
+                for(angka=1;angka<=i;angka++){
+                    ps.setString(angka,a[angka-1]);
+                } 
+                ps.executeUpdate();       
+                bool=true;
+             }catch(Exception e){
+                bool=false;
+                System.out.println("Notifikasi : "+e);
              }finally{
                 if(ps != null){
                     ps.close();

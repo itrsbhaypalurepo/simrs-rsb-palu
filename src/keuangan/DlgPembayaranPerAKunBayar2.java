@@ -41,7 +41,7 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
     private ResultSet rs,rsakunbayar;
     private double all=0,bayar=0;
     private int i,kolom=0,no=0;
-    private String shift="",tanggal2="",nopemasukanlain="",nonota="",petugas="",norawatjalan="",norawatinap="",notajual="",nodeposit="";
+    private String status="",tanggal2="",nopemasukanlain="",nonota="",petugas="",norawatjalan="",norawatinap="",notajual="",nodeposit="";
     private StringBuilder htmlContent;
     private String[] akunbayar;
     private double[] totalbayar;
@@ -185,6 +185,11 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pembayaran Per Akun Bayar 2 ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
@@ -579,6 +584,30 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_TabRawatMouseClicked
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try{        
+            htmlContent = new StringBuilder();
+            htmlContent.append(                             
+                "<tr class='head'>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='27px'>No.</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='110px'>Tanggal</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='100px'>No.Rawat/No.Nota</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='220px'>Nama Pasien</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>Pembayaran</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='130px'>Petugas</td>"+
+                "</tr>"
+            );           
+            LoadHTML.setText(
+                    "<html>"+
+                      "<table width='100%' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                       htmlContent.toString()+
+                      "</table>"+
+                    "</html>");
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     /**
     * @param args the command line arguments
     */
@@ -640,10 +669,13 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>Pembayaran</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='130px'>Petugas</td>");
             kolom=0;
-            akunbayar=new String[Sequel.cariInteger("select count(kd_rek) from rekening where kd_rek in (select kd_rek from akun_bayar group by kd_rek)")];
-            psakunbayar=koneksi.prepareStatement("select kd_rek,nm_rek from rekening where kd_rek in (select kd_rek from akun_bayar group by kd_rek) order by nm_rek");
+            psakunbayar=koneksi.prepareStatement("select rekening.kd_rek,rekening.nm_rek from rekening where (rekening.kd_rek in (select akun_bayar.kd_rek from akun_bayar group by akun_bayar.kd_rek)) or (rekening.kd_rek in (select kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain group by kategori_pemasukan_lain.kd_rek2)) order by rekening.nm_rek");
             try {
                 rsakunbayar=psakunbayar.executeQuery();
+                rsakunbayar.last();
+                i=rsakunbayar.getRow();
+                akunbayar=new String[i];
+                rsakunbayar.beforeFirst();
                 while(rsakunbayar.next()){
                     akunbayar[kolom]=rsakunbayar.getString("kd_rek");
                     kolom++;
@@ -679,34 +711,36 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
                     norawatjalan="";
                     notajual="";
                     nopemasukanlain="";
+                    status="";
                     nodeposit="";
-                    nonota=Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_nota"));
+                    nonota=Sequel.cariIsi("select nota_inap.no_nota from nota_inap where nota_inap.no_rawat=?",rs.getString("no_nota"));
                     if(!nonota.equals("")){
                         norawatinap=rs.getString("no_nota");
                     }else if(nonota.equals("")){
-                        nonota=Sequel.cariIsi("select no_nota from nota_jalan where no_rawat=?",rs.getString("no_nota"));
+                        nonota=Sequel.cariIsi("select nota_jalan.no_nota from nota_jalan where nota_jalan.no_rawat=?",rs.getString("no_nota"));
                         if(!nonota.equals("")){
                             norawatjalan=rs.getString("no_nota");
                         }else if(nonota.equals("")){
-                            nonota=Sequel.cariIsi("select nota_jual from penjualan where nota_jual=?",rs.getString("no_nota"));
+                            nonota=Sequel.cariIsi("select penjualan.nota_jual from penjualan where penjualan.nota_jual=?",rs.getString("no_nota"));
                             if(!nonota.equals("")){
                                 notajual=rs.getString("no_nota");
                             }else if(nonota.equals("")){
-                                nonota=Sequel.cariIsi("select no_deposit from deposit where no_deposit=?",rs.getString("no_nota"));
+                                nonota=Sequel.cariIsi("select deposit.no_deposit from deposit where deposit.no_deposit=?",rs.getString("no_nota"));
                                 if(!nonota.equals("")){
                                     nodeposit=rs.getString("no_nota");
                                 }else{
-                                    nonota=Sequel.cariIsi("select no_masuk from pemasukan_lain where no_masuk=?",rs.getString("no_nota"));
+                                    nonota=Sequel.cariIsi("select pemasukan_lain.no_masuk from pemasukan_lain where pemasukan_lain.no_masuk=?",rs.getString("no_nota"));
                                     if(!nonota.equals("")){
                                         nopemasukanlain=rs.getString("no_nota");
                                     }else{
                                         nopemasukanlain="";
+                                        status="Transaksi Tidak Ditemukan";
                                     }
                                 }
                             }                                            
                         }
                     }
-                    if((petugas.toLowerCase().trim().contains(User.getText().toLowerCase().trim()))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
+                    if((status.equals(""))&&(petugas.toLowerCase().trim().contains(User.getText().toLowerCase().trim()))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
                         all=all+rs.getDouble("jumlah_bayar");
                         htmlContent.append(                             
                             "<tr class='isi'>"+
@@ -719,10 +753,10 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
                         for(i=0;i<kolom;i++){
                             bayar=0;
                             if(!norawatinap.equals("")){
-                                bayar=Sequel.cariIsiAngka("select detail_nota_inap.besar_bayar from detail_nota_inap inner join akun_bayar on detail_nota_inap.nama_bayar=akun_bayar.nama_bayar where detail_nota_inap.no_rawat='"+norawatinap+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
+                                bayar=Sequel.cariIsiAngka("select sum(detail_nota_inap.besar_bayar) from detail_nota_inap inner join akun_bayar on detail_nota_inap.nama_bayar=akun_bayar.nama_bayar where detail_nota_inap.no_rawat='"+norawatinap+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
                                 htmlContent.append("<td valign='middle' align='right'>"+Valid.SetAngka(bayar)+"</td>");
                             }else if(!norawatjalan.equals("")){
-                                bayar=Sequel.cariIsiAngka("select detail_nota_jalan.besar_bayar from detail_nota_jalan inner join akun_bayar on detail_nota_jalan.nama_bayar=akun_bayar.nama_bayar where detail_nota_jalan.no_rawat='"+norawatjalan+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
+                                bayar=Sequel.cariIsiAngka("select sum(detail_nota_jalan.besar_bayar) from detail_nota_jalan inner join akun_bayar on detail_nota_jalan.nama_bayar=akun_bayar.nama_bayar where detail_nota_jalan.no_rawat='"+norawatjalan+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
                                 htmlContent.append("<td valign='middle' align='right'>"+Valid.SetAngka(bayar)+"</td>");
                             }else if(!notajual.equals("")){
                                 bayar=Sequel.cariIsiAngka("select (sum(detailjual.total)+penjualan.ongkir+penjualan.ppn) from detailjual inner join penjualan on penjualan.nota_jual=detailjual.nota_jual inner join akun_bayar on penjualan.nama_bayar=akun_bayar.nama_bayar where penjualan.nota_jual='"+notajual+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
@@ -742,8 +776,8 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
                         htmlContent.append( 
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -754,9 +788,7 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
-        
-            
+            } 
             
             htmlContent.append(                             
                 "<tr class='isi'>"+
@@ -806,10 +838,13 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='80px'>Pembayaran</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='130px'>Petugas</td>");
             kolom=0;
-            akunbayar=new String[Sequel.cariInteger("select count(kd_rek) from rekening where kd_rek in (select kd_rek from akun_bayar group by kd_rek)")];
-            psakunbayar=koneksi.prepareStatement("select kd_rek,nm_rek from rekening where kd_rek in (select kd_rek from akun_bayar group by kd_rek) order by nm_rek");
+            psakunbayar=koneksi.prepareStatement("select rekening.kd_rek,rekening.nm_rek from rekening where (rekening.kd_rek in (select akun_bayar.kd_rek from akun_bayar group by akun_bayar.kd_rek)) or (rekening.kd_rek in (select kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain group by kategori_pemasukan_lain.kd_rek2)) order by rekening.nm_rek");
             try {
                 rsakunbayar=psakunbayar.executeQuery();
+                rsakunbayar.last();
+                i=rsakunbayar.getRow();
+                akunbayar=new String[i];
+                rsakunbayar.beforeFirst();
                 while(rsakunbayar.next()){
                     akunbayar[kolom]=rsakunbayar.getString("kd_rek");
                     kolom++;
@@ -845,34 +880,36 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
                     norawatjalan="";
                     notajual="";
                     nopemasukanlain="";
+                    status="";
                     nodeposit="";
-                    nonota=Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_nota"));
+                    nonota=Sequel.cariIsi("select nota_inap.no_nota from nota_inap where nota_inap.no_rawat=?",rs.getString("no_nota"));
                     if(!nonota.equals("")){
                         norawatinap=rs.getString("no_nota");
                     }else if(nonota.equals("")){
-                        nonota=Sequel.cariIsi("select no_nota from nota_jalan where no_rawat=?",rs.getString("no_nota"));
+                        nonota=Sequel.cariIsi("select nota_jalan.no_nota from nota_jalan where nota_jalan.no_rawat=?",rs.getString("no_nota"));
                         if(!nonota.equals("")){
                             norawatjalan=rs.getString("no_nota");
                         }else if(nonota.equals("")){
-                            nonota=Sequel.cariIsi("select nota_jual from penjualan where nota_jual=?",rs.getString("no_nota"));
+                            nonota=Sequel.cariIsi("select penjualan.nota_jual from penjualan where penjualan.nota_jual=?",rs.getString("no_nota"));
                             if(!nonota.equals("")){
                                 notajual=rs.getString("no_nota");
                             }else if(nonota.equals("")){
-                                nonota=Sequel.cariIsi("select no_deposit from deposit where no_deposit=?",rs.getString("no_nota"));
+                                nonota=Sequel.cariIsi("select deposit.no_deposit from deposit where deposit.no_deposit=?",rs.getString("no_nota"));
                                 if(!nonota.equals("")){
                                     nodeposit=rs.getString("no_nota");
                                 }else{
-                                    nonota=Sequel.cariIsi("select no_masuk from pemasukan_lain where no_masuk=?",rs.getString("no_nota"));
+                                    nonota=Sequel.cariIsi("select pemasukan_lain.no_masuk from pemasukan_lain where pemasukan_lain.no_masuk=?",rs.getString("no_nota"));
                                     if(!nonota.equals("")){
                                         nopemasukanlain=rs.getString("no_nota");
                                     }else{
                                         nopemasukanlain="";
+                                        status="Transaksi Tidak Ditemukan";
                                     }
                                 }
                             }                                            
                         }
                     }
-                    if((petugas.toLowerCase().trim().contains(User.getText().toLowerCase().trim()))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
+                    if((status.equals(""))&&(petugas.toLowerCase().trim().contains(User.getText().toLowerCase().trim()))&&(rs.getString("nama_pasien").toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())||nonota.toLowerCase().trim().contains(TCari.getText().toLowerCase().trim()))){
                         all=all+rs.getDouble("jumlah_bayar");
                         htmlContent.append(                             
                             "<tr class='isi'>"+
@@ -885,10 +922,10 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
                         for(i=0;i<kolom;i++){
                             bayar=0;
                             if(!norawatinap.equals("")){
-                                bayar=Sequel.cariIsiAngka("select detail_nota_inap.besar_bayar from detail_nota_inap inner join akun_bayar on detail_nota_inap.nama_bayar=akun_bayar.nama_bayar where detail_nota_inap.no_rawat='"+norawatinap+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
+                                bayar=Sequel.cariIsiAngka("select sum(detail_nota_inap.besar_bayar) from detail_nota_inap inner join akun_bayar on detail_nota_inap.nama_bayar=akun_bayar.nama_bayar where detail_nota_inap.no_rawat='"+norawatinap+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
                                 htmlContent.append("<td valign='middle' align='right'>"+Math.round(bayar)+"</td>");
                             }else if(!norawatjalan.equals("")){
-                                bayar=Sequel.cariIsiAngka("select detail_nota_jalan.besar_bayar from detail_nota_jalan inner join akun_bayar on detail_nota_jalan.nama_bayar=akun_bayar.nama_bayar where detail_nota_jalan.no_rawat='"+norawatjalan+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
+                                bayar=Sequel.cariIsiAngka("select sum(detail_nota_jalan.besar_bayar) from detail_nota_jalan inner join akun_bayar on detail_nota_jalan.nama_bayar=akun_bayar.nama_bayar where detail_nota_jalan.no_rawat='"+norawatjalan+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
                                 htmlContent.append("<td valign='middle' align='right'>"+Math.round(bayar)+"</td>");
                             }else if(!notajual.equals("")){
                                 bayar=Sequel.cariIsiAngka("select (sum(detailjual.total)+penjualan.ongkir+penjualan.ppn) from detailjual inner join penjualan on penjualan.nota_jual=detailjual.nota_jual inner join akun_bayar on penjualan.nama_bayar=akun_bayar.nama_bayar where penjualan.nota_jual='"+notajual+"' and akun_bayar.kd_rek='"+akunbayar[i]+"'");
@@ -908,8 +945,8 @@ public final class DlgPembayaranPerAKunBayar2 extends javax.swing.JDialog {
                         htmlContent.append( 
                             "</tr>"
                         ); 
-                    }          
-                    no++;                            
+                        no++;
+                    }                                
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
