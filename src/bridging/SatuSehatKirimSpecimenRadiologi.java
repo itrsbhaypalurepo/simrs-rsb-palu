@@ -6,7 +6,6 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -34,8 +33,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -495,6 +492,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                   "</table>"+
                 "</html>"
             );
+            htmlContent=null;
 
             File g = new File("file2.css");            
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -601,29 +599,20 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                         System.out.println("URL : "+link+"/Specimen");
                         System.out.println("Request JSON : "+json);
                         requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Specimen", HttpMethod.POST, requestEntity, String.class).getBody();
-                            System.out.println("Result JSON : "+json);
-                            root = mapper.readTree(json);
-                            response = root.path("id");
-                            if(!response.asText().equals("")){
-                                if(Sequel.menyimpantf2("satu_sehat_specimen_radiologi","?,?,?","No.Order",3,new String[]{
-                                    tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,12).toString(),response.asText()
-                                })==true){
-                                    tbObat.setValueAt(response.asText(),i,13);
-                                    tbObat.setValueAt(false,i,0);
-                                }
+                        json=api.getRest().exchange(link+"/Specimen", HttpMethod.POST, requestEntity, String.class).getBody();
+                        System.out.println("Result JSON : "+json);
+                        root = mapper.readTree(json);
+                        response = root.path("id");
+                        if(!response.asText().equals("")){
+                            if(Sequel.menyimpantf2("satu_sehat_specimen_radiologi","?,?,?","No.Order",3,new String[]{
+                                tbObat.getValueAt(i,5).toString(),tbObat.getValueAt(i,12).toString(),response.asText()
+                            })==true){
+                                tbObat.setValueAt(response.asText(),i,13);
+                                tbObat.setValueAt(false,i,0);
                             }
-                        
-                        
-                    }catch(HttpClientErrorException | HttpServerErrorException e) {
-                        // menampilkan error code client dan server
-                        System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                        ObjectMapper mapper = new ObjectMapper();
-                        JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                        ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                        String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                        System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }
+                    }catch(Exception e){
+                        System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -689,15 +678,8 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
                         json=api.getRest().exchange(link+"/Specimen/"+tbObat.getValueAt(i,13).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
-                    }catch(HttpClientErrorException | HttpServerErrorException e) {
-                        // menampilkan error code client dan server
-                        System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                        ObjectMapper mapper = new ObjectMapper();
-                        JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                        ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                        String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                        System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                    }catch(Exception e){
+                        System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -870,6 +852,7 @@ public final class SatuSehatKirimSpecimenRadiologi extends javax.swing.JDialog {
 
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_specimen_radiologi());
+        BtnUpdate.setEnabled(akses.getsatu_sehat_kirim_specimen_radiologi());
         BtnPrint.setEnabled(akses.getsatu_sehat_kirim_specimen_radiologi());
     }
     

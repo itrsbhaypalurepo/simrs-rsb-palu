@@ -6,7 +6,6 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -35,8 +34,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -567,6 +564,7 @@ public final class SatuSehatKirimVaksin extends javax.swing.JDialog {
                       "</table>"+
                     "</html>"
                 );
+                htmlContent=null;
 
                 File g = new File("file2.css");            
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -721,30 +719,21 @@ public final class SatuSehatKirimVaksin extends javax.swing.JDialog {
                         System.out.println("URL : "+link+"/Immunization");
                         System.out.println("Request JSON : "+json);
                         requestEntity = new HttpEntity(json,headers);
-                            json=api.getRest().exchange(link+"/Immunization", HttpMethod.POST, requestEntity, String.class).getBody();
-                            System.out.println("Result JSON : "+json);
-                            root = mapper.readTree(json);
-                            response = root.path("id");
-                            if(!response.asText().equals("")){
-                                if(Sequel.menyimpantf2("satu_sehat_immunization","?,?,?,?,?,?,?","Imunisasi/Vaksin",7,new String[]{
-                                    tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,20).toString().substring(0,10),tbObat.getValueAt(i,20).toString().substring(11,19), 
-                                    tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,19).toString(),tbObat.getValueAt(i,28).toString(),response.asText()
-                                })==true){
-                                    tbObat.setValueAt(response.asText(),i,27);
-                                    tbObat.setValueAt(false,i,0);
-                                }
+                        json=api.getRest().exchange(link+"/Immunization", HttpMethod.POST, requestEntity, String.class).getBody();
+                        System.out.println("Result JSON : "+json);
+                        root = mapper.readTree(json);
+                        response = root.path("id");
+                        if(!response.asText().equals("")){
+                            if(Sequel.menyimpantf2("satu_sehat_immunization","?,?,?,?,?,?,?","Imunisasi/Vaksin",7,new String[]{
+                                tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,20).toString().substring(0,10),tbObat.getValueAt(i,20).toString().substring(11,19), 
+                                tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,19).toString(),tbObat.getValueAt(i,28).toString(),response.asText()
+                            })==true){
+                                tbObat.setValueAt(response.asText(),i,27);
+                                tbObat.setValueAt(false,i,0);
                             }
-                        
-                        
-                    }catch(HttpClientErrorException | HttpServerErrorException e) {
-                        // menampilkan error code client dan server
-                        System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                        ObjectMapper mapper = new ObjectMapper();
-                        JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                        ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                        String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                        System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                        }
+                    }catch(Exception e){
+                        System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -857,15 +846,8 @@ public final class SatuSehatKirimVaksin extends javax.swing.JDialog {
                         json=api.getRest().exchange(link+"/Immunization/"+tbObat.getValueAt(i,27).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
-                    }catch(HttpClientErrorException | HttpServerErrorException e) {
-                        // menampilkan error code client dan server
-                        System.err.println("Error Response Status Code: " + e.getStatusCode());
-
-                        ObjectMapper mapper = new ObjectMapper();
-                        JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                        ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                        String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                        System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                    }catch(Exception e){
+                        System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -1059,6 +1041,7 @@ public final class SatuSehatKirimVaksin extends javax.swing.JDialog {
 
     public void isCek(){
         BtnKirim.setEnabled(akses.getsatu_sehat_kirim_Immunization());
+        BtnUpdate.setEnabled(akses.getsatu_sehat_kirim_Immunization());
         BtnPrint.setEnabled(akses.getsatu_sehat_kirim_Immunization());
     }
     

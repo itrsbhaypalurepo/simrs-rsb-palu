@@ -6,7 +6,6 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -34,8 +33,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 /**
  *
@@ -492,6 +489,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                   "</table>"+
                 "</html>"
             );
+            htmlContent=null;
 
             File g = new File("file2.css");            
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
@@ -576,16 +574,16 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                                     "\"title\" : \"Instruksi Medik dan Keperawatan Pasien\"," +
                                     "\"status\" : \"active\"," +
                                     (tbObat.getValueAt(i,12).toString().equals("Ralan")?
-                                    "\"category\" : [" +
-                                        "{" +
-                                            "\"coding\" : [" +
-                                                "{" +
-                                                    "\"system\" : \"http://snomed.info/sct\"," +
-                                                    "\"code\" : \"736271009\"," +
-                                                    "\"display\" : \"Outpatient care plan\"" +
-                                                "}" +
-                                            "]" +
-                                        "}" +
+                                        "\"category\" : [" +
+                                            "{" +
+                                                "\"coding\" : [" +
+                                                    "{" +
+                                                        "\"system\" : \"http://snomed.info/sct\"," +
+                                                        "\"code\" : \"736271009\"," +
+                                                        "\"display\" : \"Outpatient care plan\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
                                         "],":
                                         "\"category\" : [" +
                                             "{" +
@@ -600,7 +598,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                                         "],"
                                     )+
                                     "\"intent\" : \"plan\"," +
-                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString()+"\"," +
+                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
                                     "\"subject\" : {" +
                                         "\"reference\" : \"Patient/"+idpasien+"\"," +
                                         "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
@@ -630,15 +628,8 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                                 tbObat.setValueAt(false,i,0);
                             }
                         }
-                    }catch(HttpClientErrorException | HttpServerErrorException e) {
-                        // menampilkan error code client dan server
-                        System.err.println("Error Response Status Code: " + e.getStatusCode());
-                            
-                        ObjectMapper mapper = new ObjectMapper();
-                        JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                        ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                        String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                        System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                    }catch(Exception e){
+                        System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -679,16 +670,16 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                                     "\"title\" : \"Instruksi Medik dan Keperawatan Pasien\"," +
                                     "\"status\" : \"active\"," +
                                     (tbObat.getValueAt(i,12).toString().equals("Ralan")?
-                                    "\"category\" : [" +
-                                        "{" +
-                                            "\"coding\" : [" +
-                                                "{" +
-                                                    "\"system\" : \"http://snomed.info/sct\"," +
-                                                    "\"code\" : \"736271009\"," +
-                                                    "\"display\" : \"Outpatient care plan\"" +
-                                                "}" +
-                                            "]" +
-                                        "}" +
+                                        "\"category\" : [" +
+                                            "{" +
+                                                "\"coding\" : [" +
+                                                    "{" +
+                                                        "\"system\" : \"http://snomed.info/sct\"," +
+                                                        "\"code\" : \"736271009\"," +
+                                                        "\"display\" : \"Outpatient care plan\"" +
+                                                    "}" +
+                                                "]" +
+                                            "}" +
                                         "],":
                                         "\"category\" : [" +
                                             "{" +
@@ -703,7 +694,7 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                                         "],"
                                     )+
                                     "\"intent\" : \"plan\"," +
-                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString()+"\"," +
+                                    "\"description\" : \""+tbObat.getValueAt(i,7).toString().replaceAll("(\r\n|\r|\n|\n\r)","<br>").replaceAll("\t", " ")+"\"," +
                                     "\"subject\" : {" +
                                         "\"reference\" : \"Patient/"+idpasien+"\"," +
                                         "\"display\" : \""+tbObat.getValueAt(i,4).toString()+"\"" +
@@ -724,15 +715,8 @@ public final class SatuSehatKirimCarePlan extends javax.swing.JDialog {
                         json=api.getRest().exchange(link+"/CarePlan/"+tbObat.getValueAt(i,11).toString(), HttpMethod.PUT, requestEntity, String.class).getBody();
                         System.out.println("Result JSON : "+json);
                         tbObat.setValueAt(false,i,0);
-                    }catch(HttpClientErrorException | HttpServerErrorException e) {
-                        // menampilkan error code client dan server
-                        System.err.println("Error Response Status Code: " + e.getStatusCode());
-                            
-                        ObjectMapper mapper = new ObjectMapper();
-                        JsonNode errorResponse = mapper.readTree(e.getResponseBodyAsString());
-                        ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-                        String prettyErrorResponse = writer.writeValueAsString(errorResponse);
-                        System.err.println("Error Response JSON: \n" + prettyErrorResponse);
+                    }catch(Exception e){
+                        System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
