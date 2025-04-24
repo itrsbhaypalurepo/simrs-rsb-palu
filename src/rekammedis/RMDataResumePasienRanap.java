@@ -1948,7 +1948,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                     Keadaan.getSelectedItem().toString(),KetKeadaanPulang.getText(),DIlanjutkan.getSelectedItem().toString(),KetDilanjutkan.getText(),
                     Valid.SetTgl(Kontrol.getSelectedItem()+"")+" "+Kontrol.getSelectedItem().toString().substring(11,19),ObatPulang.getText()
                 })==true){
-                    tabMode.addRow(new String[]{
+                    tabMode.addRow(new Object[]{
                         TNoRw.getText(),TNoRM.getText(),TPasien.getText(),KodeDokter.getText(),NamaDokter.getText(),KodeDokterPengirim.getText(),NamaDokterPengirim.getText(),
                         KdRuang.getText(),NmRuang.getText(),Masuk.getText(),JamMasuk.getText(),Keluar.getText(),JamKeluar.getText(),DiagnosaAwal.getText(),Alasan.getText(),
                         KeluhanUtama.getText(),PemeriksaanFisik.getText(),JalannyaPenyakit.getText(),PemeriksaanRad.getText(),HasilLaborat.getText(),TindakanSelamaDiRS.getText(),
@@ -3030,17 +3030,23 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                                 JOptionPane.showMessageDialog(null,"Proses tanda tangan berhasil...");
                                 Desktop.getDesktop().browse(new File("Resume"+TNoRw.getText().trim().replaceAll("/","")+"_"+TNoRM.getText().trim().replaceAll(" ","")+"_"+TPasien.getText().trim().replaceAll(" ","")+".pdf").toURI());
                             } catch (Exception e) {
+                                WindowPhrase.dispose();
                                 JOptionPane.showMessageDialog(null,"Gagal mengkonversi base64 ke file...");
                                 System.out.println("Notif : " +e);
                             }
                         } else {
+                            WindowPhrase.dispose();
                             JOptionPane.showMessageDialog(null,"Code : "+root.path("metadata").path("code").asText()+" Pesan : "+root.path("metadata").path("message").asText());
                         }
                     } catch (IOException a) {
                         System.out.println("Notifikasi : " + a);
+                        WindowPhrase.dispose();
+                        JOptionPane.showMessageDialog(null,""+a);
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : " + e);
+                    WindowPhrase.dispose();
+                    JOptionPane.showMessageDialog(null,""+e);
                 }
             }
         }
@@ -3293,7 +3299,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                         }
                     }
                     
-                    tabMode.addRow(new String[]{
+                    tabMode.addRow(new Object[]{
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("kd_dokter"),rs.getString("nm_dokter"),
                         rs.getString("kodepengirim"),rs.getString("pengirim"),kodekamar,namakamar,rs.getString("tgl_registrasi"),rs.getString("jam_reg"),tglkeluar,
                         jamkeluar,rs.getString("diagnosa_awal"),rs.getString("alasan"),rs.getString("keluhan_utama"),rs.getString("pemeriksaan_fisik"),

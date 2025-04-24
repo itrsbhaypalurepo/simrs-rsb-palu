@@ -1206,14 +1206,11 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
                         "laporan_tindakan.nip,petugas.nama,laporan_tindakan.kd_dokter,dokter.nm_dokter,laporan_tindakan.diagnosa_pra_tindakan,laporan_tindakan.diagnosa_pasca_tindakan,"+
                         "laporan_tindakan.tindakan_medik,laporan_tindakan.uraian,laporan_tindakan.hasil,laporan_tindakan.kesimpulan,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,"+
                         "propinsi.nm_prop,poliklinik.nm_poli,pasien.alamat from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        "inner join kelurahan on kelurahan.kd_kel=pasien.kd_kel "+
-                        "inner join kecamatan on kecamatan.kd_kec=pasien.kd_kec "+
-                        "inner join kabupaten on kabupaten.kd_kab=pasien.kd_kab "+
-                        "inner join propinsi on propinsi.kd_prop=pasien.kd_prop "+
-                        "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
-                        "inner join laporan_tindakan on reg_periksa.no_rawat=laporan_tindakan.no_rawat "+
-                        "inner join dokter on laporan_tindakan.kd_dokter=dokter.kd_dokter "+
-                        "inner join petugas on laporan_tindakan.nip=petugas.nip where laporan_tindakan.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                        "inner join kelurahan on kelurahan.kd_kel=pasien.kd_kel inner join kecamatan on kecamatan.kd_kec=pasien.kd_kec "+
+                        "inner join kabupaten on kabupaten.kd_kab=pasien.kd_kab inner join propinsi on propinsi.kd_prop=pasien.kd_prop "+
+                        "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join laporan_tindakan on reg_periksa.no_rawat=laporan_tindakan.no_rawat "+
+                        "inner join dokter on laporan_tindakan.kd_dokter=dokter.kd_dokter inner join petugas on laporan_tindakan.nip=petugas.nip where "+
+                        "laporan_tindakan.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' and laporan_tindakan.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()+"' ",param);
         }
     }//GEN-LAST:event_MnPenilaianMedisActionPerformed
 
@@ -1411,7 +1408,7 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
                         "inner join dokter on laporan_tindakan.kd_dokter=dokter.kd_dokter "+
                         "inner join petugas on laporan_tindakan.nip=petugas.nip where "+
                         "laporan_tindakan.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
-                        "laporan_tindakan.nip like ? or petugas.nama like ?) order by laporan_tindakan.tanggal");
+                        "laporan_tindakan.kd_dokter like ? or dokter.nm_dokter like ?) order by laporan_tindakan.tanggal");
             }
                 
             try {
@@ -1429,8 +1426,8 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
                 }   
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new String[]{
-                        rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("tgl_lahir"),rs.getString("jk"),rs.getString("kd_dokter"),rs.getString("nm_dokter"),
+                    tabMode.addRow(new Object[]{
+                        rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getDate("tgl_lahir"),rs.getString("jk"),rs.getString("kd_dokter"),rs.getString("nm_dokter"),
                         rs.getString("nip"),rs.getString("nama"),rs.getString("tanggal"),rs.getString("diagnosa_pra_tindakan"),rs.getString("diagnosa_pasca_tindakan"),rs.getString("tindakan_medik"),
                         rs.getString("uraian"),rs.getString("hasil"),rs.getString("kesimpulan")                     
                     });
@@ -1553,8 +1550,8 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
     }
 
     private void hapus() {
-        if(Sequel.queryu2tf("delete from laporan_tindakan where no_rawat=?",1,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+        if(Sequel.queryu2tf("delete from laporan_tindakan where no_rawat=? and tanggal=?",2,new String[]{
+            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()
         })==true){
             tabMode.removeRow(tbObat.getSelectedRow());
             LCount.setText(""+tabMode.getRowCount());
@@ -1565,10 +1562,9 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
     }
 
     private void ganti() {
-        if(Sequel.mengedittf("laporan_tindakan","no_rawat=?","no_rawat=?,tanggal=?,kd_dokter=?,nip=?,diagnosa_pra_tindakan=?,diagnosa_pasca_tindakan=?,tindakan_medik=?,uraian=?,hasil=?,kesimpulan=?",11,new String[]{
-                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
-                KdDokter.getText(),KdPetugas.getText(),DiagnosaPraTindakan.getText(),DIagnosaPaskaTindakan.getText(),TindakanMedis.getText(), 
-                UraianTindakan.getText(),HasilTindakan.getText(),Kesimpulan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+        if(Sequel.mengedittf("laporan_tindakan","no_rawat=? and tanggal=?","no_rawat=?,tanggal=?,kd_dokter=?,nip=?,diagnosa_pra_tindakan=?,diagnosa_pasca_tindakan=?,tindakan_medik=?,uraian=?,hasil=?,kesimpulan=?",12,new String[]{
+                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),KdPetugas.getText(),DiagnosaPraTindakan.getText(),DIagnosaPaskaTindakan.getText(),
+                TindakanMedis.getText(),UraianTindakan.getText(),HasilTindakan.getText(),Kesimpulan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()
             })==true){
                 tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
                 tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
@@ -1597,7 +1593,7 @@ public final class RMLaporanTindakan extends javax.swing.JDialog {
                 KdDokter.getText(),KdPetugas.getText(),DiagnosaPraTindakan.getText(),DIagnosaPaskaTindakan.getText(),TindakanMedis.getText(), 
                 UraianTindakan.getText(),HasilTindakan.getText(),Kesimpulan.getText()
             })==true){
-                tabMode.addRow(new String[]{
+                tabMode.addRow(new Object[]{
                     TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),KdDokter.getText(),NmDokter.getText(),
                     KdPetugas.getText(),NmPetugas.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
                     DiagnosaPraTindakan.getText(),DIagnosaPaskaTindakan.getText(),TindakanMedis.getText(),UraianTindakan.getText(),HasilTindakan.getText(),

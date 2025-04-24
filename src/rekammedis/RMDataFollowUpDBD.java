@@ -107,8 +107,8 @@ public final class RMDataFollowUpDBD extends javax.swing.JDialog {
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         NIP.setDocument(new batasInput((byte)20).getKata(NIP));
-        Hemo.setDocument(new batasInput((byte)3).getKata(Hemo));
-        Hema.setDocument(new batasInput((byte)3).getKata(Hema));
+        Hemo.setDocument(new batasInput((byte)5).getKata(Hemo));
+        Hema.setDocument(new batasInput((byte)5).getKata(Hema));
         Leo.setDocument(new batasInput((byte)7).getKata(Leo));
         Trombo.setDocument(new batasInput((byte)10).getKata(Trombo));
         TerapiCairan.setDocument(new batasInput((int)100).getKata(TerapiCairan));
@@ -1198,9 +1198,9 @@ public final class RMDataFollowUpDBD extends javax.swing.JDialog {
                     
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new String[]{
+                    tabMode.addRow(new Object[]{
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),
-                        rs.getString("jk"),rs.getString("tgl_lahir"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),rs.getString("hemoglobin"),rs.getString("hematokrit"),
+                        rs.getString("jk"),rs.getDate("tgl_lahir"),rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),rs.getString("hemoglobin"),rs.getString("hematokrit"),
                         rs.getString("leokosit"),rs.getString("trombosit"),rs.getString("terapi_cairan"),rs.getString("nip"),rs.getString("nama")
                     });
                 }
@@ -1428,7 +1428,7 @@ public final class RMDataFollowUpDBD extends javax.swing.JDialog {
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
             Hemo.getText(),Hema.getText(),Leo.getText(),Trombo.getText(),TerapiCairan.getText(),NIP.getText()
         })==true){
-            tabMode.addRow(new String[]{
+            tabMode.addRow(new Object[]{
                 TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Umur.getText(),JK.getText(),TglLahir.getText(),
                 Valid.SetTgl(Tanggal.getSelectedItem()+""),Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 Hemo.getText(),Hema.getText(),Leo.getText(),Trombo.getText(),TerapiCairan.getText(),NIP.getText(),NamaPetugas.getText()
